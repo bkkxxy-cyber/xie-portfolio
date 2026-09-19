@@ -144,10 +144,11 @@
     .case-kicker { margin: 0 0 18px; color: var(--muted); font-size: 11px; }
     .case-title { margin: 0; max-width: 1180px; font-family: var(--display); font-size: clamp(58px, 10vw, 146px); font-weight: 400; line-height: 1.08; letter-spacing: .035em; overflow-wrap: anywhere; }
     .case-lead { margin: clamp(28px, 4vw, 56px) 0 0; max-width: 780px; color: var(--muted); font-size: clamp(17px, 1.8vw, 25px); line-height: 1.7; overflow-wrap: anywhere; }
-    .metric-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .metric { min-width: 0; padding: clamp(26px, 4vw, 56px) var(--pad); }
     .metric + .metric { border-left: 1px solid var(--line); }
     .metric strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: clamp(44px, 6vw, 88px); font-weight: 400; line-height: 1; letter-spacing: -.025em; overflow-wrap: anywhere; }
+    .metric.is-compact strong { font-family: var(--display); font-size: clamp(35px, 4.4vw, 64px); letter-spacing: .02em; }
     .metric span { display: block; margin-top: 12px; color: var(--muted); font-size: 12px; line-height: 1.55; }
     .evidence-list { display: grid; }
     .evidence { display: grid; grid-template-columns: minmax(180px, .7fr) minmax(0, 1.3fr); gap: clamp(30px, 6vw, 96px); align-items: center; padding: clamp(54px, 9vw, 130px) var(--pad); border-bottom: 1px solid var(--line); }
@@ -158,13 +159,23 @@
     .evidence-label { margin: 0 0 14px; color: var(--muted); font-size: 11px; }
     .evidence-title { margin: 0; font-family: var(--display); font-size: clamp(31px, 4vw, 58px); font-weight: 400; line-height: 1.2; overflow-wrap: anywhere; }
     .evidence-desc { margin: 19px 0 0; max-width: 500px; color: var(--muted); font-size: 14px; line-height: 1.85; overflow-wrap: anywhere; }
+    .evidence-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 34px; border-top: 1px solid var(--line); }
+    .evidence-fact { min-width: 0; padding: 17px 12px 0 0; }
+    .evidence-fact + .evidence-fact { padding-left: 14px; border-left: 1px solid var(--line); }
+    .evidence-fact strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: clamp(24px, 2.7vw, 38px); font-weight: 400; line-height: 1.05; letter-spacing: -.025em; overflow-wrap: anywhere; }
+    .evidence-fact span { display: block; margin-top: 8px; color: var(--muted); font-size: 10px; line-height: 1.55; }
     .evidence-media { min-width: 0; display: grid; place-items: center; }
     .evidence-media img { display: block; width: auto; max-width: 100%; max-height: 780px; height: auto; object-fit: contain; background: var(--white); box-shadow: 0 24px 70px rgba(20,20,18,.07); }
+    .evidence.is-portrait .evidence-media img { max-width: min(100%, 430px); }
     .workflow-detail { width: min(100%, 920px); padding: clamp(34px, 5vw, 72px); background: var(--ink); color: var(--paper); }
     .workflow-detail .workflow-card-title { max-width: 650px; font-size: clamp(42px, 6vw, 84px); }
     .workflow-detail .workflow-flow { margin-top: 110px; }
     .workflow-notes { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid #4d4c47; margin-top: 42px; }
     .workflow-note { min-width: 0; padding: 18px 10px 0 0; color: #aaa9a2; font-size: 10px; line-height: 1.65; overflow-wrap: anywhere; }
+    .scenario-grid { width: min(100%, 920px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--ink); border-left: 1px solid var(--ink); }
+    .scenario-item { min-width: 0; min-height: 190px; padding: clamp(24px, 3vw, 42px); border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+    .scenario-item strong { display: block; max-width: 330px; font-family: var(--display); font-size: clamp(24px, 2.7vw, 39px); font-weight: 400; line-height: 1.25; }
+    .scenario-item span { display: block; max-width: 330px; margin-top: 17px; color: var(--muted); font-size: 12px; line-height: 1.75; }
     .case-next { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: clamp(48px, 8vw, 104px) var(--pad); }
     .next-label { margin: 0 0 8px; color: var(--muted); font-size: 11px; }
     .next-title { margin: 0; font-family: var(--display); font-size: clamp(34px, 4.8vw, 68px); font-weight: 400; line-height: 1.2; overflow-wrap: anywhere; }
@@ -225,19 +236,30 @@
       .case-kicker { margin-bottom: 13px; }
       .case-title { font-size: clamp(46px, 12.5vw, 58px); line-height: 1.1; }
       .case-lead { margin-top: 25px; font-size: 16px; line-height: 1.75; }
-      .metric-grid { grid-template-columns: 1fr; }
+      .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .metric { padding: 26px 18px 29px; }
-      .metric + .metric { border-left: 0; border-top: 1px solid var(--line); }
-      .metric strong { font-size: 58px; }
+      .metric + .metric { border-left: 0; }
+      .metric:nth-child(even) { border-left: 1px solid var(--line); }
+      .metric:nth-child(n + 3) { border-top: 1px solid var(--line); }
+      .metric strong { font-size: clamp(38px, 11vw, 49px); }
+      .metric.is-compact strong { font-size: 34px; line-height: 1.15; }
       .evidence { grid-template-columns: 1fr; gap: 30px; padding: 52px 18px 58px; }
       .evidence:nth-child(even) .evidence-copy, .evidence:nth-child(even) .evidence-media { order: initial; }
       .evidence-title { font-size: 35px; }
       .evidence-desc { font-size: 13px; line-height: 1.8; }
+      .evidence-facts { margin-top: 27px; }
+      .evidence-fact { padding-top: 14px; padding-right: 8px; }
+      .evidence-fact + .evidence-fact { padding-left: 10px; }
+      .evidence-fact strong { font-size: clamp(22px, 7vw, 29px); }
+      .evidence-fact span { font-size: 9px; }
       .evidence-media img { max-height: 690px; }
       .workflow-detail { padding: 30px 20px; }
       .workflow-detail .workflow-card-title { font-size: 43px; }
       .workflow-detail .workflow-flow { margin-top: 72px; }
       .workflow-notes { display: none; }
+      .scenario-grid { grid-template-columns: 1fr; }
+      .scenario-item { min-height: 0; padding: 26px 22px 29px; }
+      .scenario-item strong { font-size: 28px; }
       .case-next { padding: 48px 18px 54px; }
       .next-title { font-size: 34px; }
       .next-button { width: 48px; height: 48px; }
@@ -364,38 +386,42 @@
     let pointerStart = null
     let homeScroll = 0
 
-    const workflowVisual = `<div class="workflow-detail"><div class="workflow-card-label">Skill / Agent</div><div class="workflow-card-title">AI 内容工作流</div><div class="workflow-flow" aria-hidden="true"><div class="workflow-node" style="--delay:0s">热点检索</div><div class="workflow-node" style="--delay:1s">来源核验</div><div class="workflow-node" style="--delay:2s">内容整理</div><div class="workflow-node" style="--delay:3s">平台改写</div><div class="workflow-node" style="--delay:4s">数据复盘</div></div><div class="workflow-notes"><div class="workflow-note">发现热点与用户问题</div><div class="workflow-note">回到原始信息确认事实</div><div class="workflow-note">提取结构与可用素材</div><div class="workflow-note">按平台语境重写表达</div><div class="workflow-note">依据反馈继续调整</div></div></div>`
+    const workflowVisual = `<div class="workflow-detail"><div class="workflow-card-label">Skill / Agent</div><div class="workflow-card-title">选题到复盘</div><div class="workflow-flow" aria-hidden="true"><div class="workflow-node" style="--delay:0s">热点检索</div><div class="workflow-node" style="--delay:1s">来源核验</div><div class="workflow-node" style="--delay:2s">内容整理</div><div class="workflow-node" style="--delay:3s">平台改写</div><div class="workflow-node" style="--delay:4s">数据复盘</div></div><div class="workflow-notes"><div class="workflow-note">发现热点与用户问题</div><div class="workflow-note">回到原始信息确认事实</div><div class="workflow-note">提取结构与可用素材</div><div class="workflow-note">按平台语境重写表达</div><div class="workflow-note">依据反馈继续调整</div></div></div>`
+    const scenarioVisual = `<div class="scenario-grid"><div class="scenario-item"><strong>内容生产</strong><span>选题研究、平台改写、发布记录与数据回收</span></div><div class="scenario-item"><strong>信息核验</strong><span>保留信息来源和待核验项，降低事实性错误</span></div><div class="scenario-item"><strong>模型监控</strong><span>跟踪大模型价格、版本与公开信息变化</span></div><div class="scenario-item"><strong>质检与审核</strong><span>完成去重、结构检查和人工确认，保留内容判断</span></div></div>`
 
     const caseData = {
       content: {
         kicker: '小红书 / 抖音',
-        title: '小澈赛博茶水间',
-        lead: '围绕 AI 工具与 Skill 的真实使用场景完成选题　内容生产　平台发布与数据复盘',
-        metrics: [['182.1万', '小红书累计曝光'], ['108.7万', '抖音累计播放'], ['6.4万', '小红书累计收藏']],
+        title: '小澈的赛博茶水间',
+        lead: '围绕 AI 工具、Skill 与真实使用场景，完成选题研究、内容策划、发布运营和数据复盘。',
+        metrics: [['182.1万', '小红书累计曝光'], ['108.7万', '抖音累计播放'], ['6.4万', '双平台累计收藏'], ['1.03万', '双平台累计分享']],
         evidence: [
-          { label: '小红书', title: '去 AI 味十大 Skill 榜', desc: '把用户对 AI 内容同质化的痛点转成可收藏的工具清单', image: 'assets/xhs-top.png', alt: '小红书去 AI 味十大 Skill 榜发布截图' },
-          { label: '抖音', title: 'video shotcraft 实跑', desc: '用实际生成结果说明 Skill 能做什么并保留平台数据作为内容反馈', image: 'assets/douyin-top.png', alt: '抖音 video shotcraft 发布截图' }
+          { label: '小红书', title: '去 AI 味十大 Skill 榜', desc: '围绕用户对 AI 稿件同质化的直接痛点，用可下载的 Skill 清单和使用路径组织内容。', facts: [['118.2万', '单篇曝光'], ['1.91万', '收藏'], ['2,991', '分享']], image: 'assets/xhs-top.png', alt: '小红书去 AI 味十大 Skill 榜发布截图', shape: 'portrait' },
+          { label: '抖音', title: 'video shotcraft 实跑', desc: '先展示视频生成结果，再用实跑过程解释 Skill 的用途和使用方式。', facts: [['32.3万', '播放'], ['1.35万', '收藏'], ['2,234', '分享']], image: 'assets/douyin-top.png', alt: '抖音 video shotcraft 发布截图', shape: 'portrait' }
         ],
         next: 'sweetplanet'
       },
       sweetplanet: {
         kicker: '内容运营与用户增长',
         title: '甜星球日报社',
-        lead: '独立创建并运营账号　通过热点判断　内容策划和社群反馈形成持续增长',
-        metrics: [['400万', '粉丝规模'], ['62条', '微博热搜'], ['100万+', '累计讨论量']],
+        lead: '从 0 创建并运营内容账号，通过热点判断、内容策划和用户反馈推动长期增长。',
+        metrics: [['400万', '粉丝规模'], ['62条', '微博热搜'], ['40亿+', '累计话题阅读'], ['100万+', '累计讨论量']],
         evidence: [
-          { label: '高传播内容', title: '单帖11万转发', desc: '围绕情绪共鸣与用户参与设计内容　形成大规模自然传播', image: 'assets/sweetplanet-hotpost-11w-share.png', alt: '甜星球日报社十一万转发热帖截图' },
-          { label: 'IP 延展', title: '实体书出版', desc: '将线上内容沉淀为实体书　首发销量1万+　同期延展喜马拉雅电台与网易云音乐合作', image: 'assets/sweetplanet-book.jpg', alt: '甜星球旅途愉快实体书照片' },
-          { label: '高传播内容', title: '单帖5万转发', desc: '另一条高表现内容放在案例内作为持续产出证明', image: 'assets/sweetplanet-hotpost-5w-share.png', alt: '甜星球日报社五万转发热帖截图' }
+          { label: '热点传播', title: '单帖11万转发', desc: '把情绪共鸣、热点节点和用户参与组织成可传播的图文内容。', image: 'assets/sweetplanet-hotpost-11w-share.png', alt: '甜星球日报社十一万转发热帖截图' },
+          { label: '持续产出', title: '单帖5万转发', desc: '同一账号内持续产出高传播内容，保持稳定的选题判断和内容表达。', image: 'assets/sweetplanet-hotpost-5w-share.png', alt: '甜星球日报社五万转发热帖截图' },
+          { label: '内容产品化', title: '《甜星球旅途愉快》', desc: '完成内容选材、章节编排和文稿撰写，并将原创内容延展至喜马拉雅音频节目和网易云音乐合作。', facts: [['1万+', '首发销量'], ['1万+', '音乐点赞']], image: 'assets/sweetplanet-book.jpg', alt: '甜星球旅途愉快实体书照片' }
         ],
         next: 'workflow'
       },
       workflow: {
         kicker: 'Skill / Agent',
         title: 'AI 内容工作流',
-        lead: '把热点检索　来源核验　内容整理　平台改写与数据复盘连接为可复用流程',
-        metrics: [['5步', '核心环节'], ['多平台', '内容适配'], ['可复用', '执行流程']],
-        evidence: [{ label: '工作流', title: '选题到复盘', desc: '每一步保留来源与结果　减少重复操作　内容判断仍由人完成', custom: workflowVisual }],
+        lead: '围绕内容生产、信息采集与事实核验等场景，搭建并维护可复用的 Skill / Agent 工作流。',
+        metrics: [['5步', '核心流程'], ['4类', '实际业务场景'], ['多平台', '内容适配'], ['人工审核', '保留内容判断', 'compact']],
+        evidence: [
+          { label: '执行流程', title: '选题到复盘', desc: '在关键节点保留信息来源、处理结果和人工确认，减少重复操作和内容错误。', custom: workflowVisual },
+          { label: '实际应用', title: '已覆盖的工作场景', desc: '工作流处理高频任务，选题、表达和发布前判断仍由人工完成。', custom: scenarioVisual }
+        ],
         next: 'content'
       }
     }
@@ -474,8 +500,9 @@
 
     function renderMetrics(metrics) {
       const target = document.querySelector('#metricGrid')
-      target.replaceChildren(...metrics.map(([value, label]) => {
+      target.replaceChildren(...metrics.map(([value, label, modifier]) => {
         const item = document.createElement('div'); item.className = 'metric'
+        if (modifier) item.classList.add(`is-${modifier}`)
         const strong = document.createElement('strong'); strong.textContent = value
         const span = document.createElement('span'); span.textContent = label
         item.append(strong, span); return item
@@ -486,11 +513,22 @@
       const target = document.querySelector('#evidenceList')
       target.replaceChildren(...items.map(item => {
         const section = document.createElement('article'); section.className = 'evidence'
+        if (item.shape) section.classList.add(`is-${item.shape}`)
         const copy = document.createElement('div'); copy.className = 'evidence-copy'
         const label = document.createElement('p'); label.className = 'evidence-label'; label.textContent = item.label
         const title = document.createElement('h2'); title.className = 'evidence-title'; title.textContent = item.title
         const desc = document.createElement('p'); desc.className = 'evidence-desc'; desc.textContent = item.desc
         copy.append(label, title, desc)
+        if (item.facts?.length) {
+          const facts = document.createElement('div'); facts.className = 'evidence-facts'
+          item.facts.forEach(([value, factLabel]) => {
+            const fact = document.createElement('div'); fact.className = 'evidence-fact'
+            const strong = document.createElement('strong'); strong.textContent = value
+            const span = document.createElement('span'); span.textContent = factLabel
+            fact.append(strong, span); facts.append(fact)
+          })
+          copy.append(facts)
+        }
         const media = document.createElement('div'); media.className = 'evidence-media'
         if (item.custom) media.innerHTML = item.custom
         else { const image = document.createElement('img'); image.src = item.image; image.alt = item.alt; image.loading = 'lazy'; media.append(image) }
