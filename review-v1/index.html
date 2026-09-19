@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>谢叙雨 | 作品集预览</title>
+  <style>
+    :root {
+      --bg: #fff;
+      --ink: #111;
+      --muted: #6c6c68;
+      --line: #94948e;
+      --soft: #f3f2ed;
+      --pad: clamp(14px, 1.35vw, 20px);
+      --ease: cubic-bezier(.22, 1, .36, 1);
+      --display: "Yuanti SC", "PingFang SC", "Hiragino Sans GB", sans-serif;
+      --sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--bg); color: var(--ink); scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      background: var(--bg);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; }
+    button { font: inherit; color: inherit; }
+    [hidden] { display: none !important; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: 48px;
+      padding: max(9px, env(safe-area-inset-top)) var(--pad) 11px;
+      border-bottom: .5px solid var(--line);
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(12px);
+    }
+    .nav-inner { position: relative; width: 100%; height: 100%; }
+    .nav-link {
+      position: absolute;
+      bottom: 0;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      font-size: 11px;
+      line-height: 1;
+      letter-spacing: .02em;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .nav-link::after {
+      content: "";
+      display: block;
+      height: 1px;
+      margin-top: 3px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .45s var(--ease);
+    }
+    .nav-link:hover::after,
+    .nav-link:focus-visible::after { transform: scaleX(1); }
+    .n-home { left: 0; }
+    .n-work { left: 25%; translate: -50% 0; }
+    .n-about { left: 75%; translate: -50% 0; }
+    .n-contact { right: 0; }
+    .nav-mark {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 28px;
+      height: 28px;
+      translate: -50% -50%;
+      animation: spin 18s linear infinite;
+    }
+    .nav-mark svg { display: block; width: 100%; height: 100%; }
+    @keyframes spin { to { rotate: 360deg; } }
+    .mobile-head,
+    .mobile-menu { display: none; }
+
+    .wordmark {
+      overflow: hidden;
+      padding: clamp(4px, .75vw, 11px) var(--pad) clamp(9px, 1.25vw, 18px);
+    }
+    .wordmark h1 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(120px, 28.5vw, 410px);
+      font-weight: 400;
+      line-height: .82;
+      letter-spacing: -.105em;
+      white-space: nowrap;
+      transform: translateX(-.055em);
+    }
+    .intro-band {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 96px;
+      border-top: .5px solid var(--line);
+      border-bottom: .5px solid var(--line);
+    }
+    .intro-statement,
+    .intro-profile { padding: 15px var(--pad) 16px; }
+    .intro-statement {
+      font-family: var(--display);
+      font-size: clamp(24px, 2.3vw, 34px);
+      font-weight: 400;
+      line-height: 1.12;
+      letter-spacing: -.045em;
+    }
+    .intro-profile {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto;
+      gap: 24px;
+      align-items: end;
+      border-left: .5px solid var(--line);
+    }
+    .capabilities {
+      margin: 0;
+      max-width: 310px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+    .contact-list {
+      display: grid;
+      gap: 7px;
+      justify-items: start;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 25px;
+      color: var(--muted);
+      font-size: 12px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .contact-link:hover,
+    .contact-link:focus-visible { color: var(--ink); }
+    .contact-link svg {
+      width: 15px;
+      height: 15px;
+      flex: 0 0 auto;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.45;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .collage {
+      position: relative;
+      overflow: hidden;
+      padding-top: 86px;
+      margin-top: -20px;
+      cursor: grab;
+      touch-action: pan-y;
+    }
+    .collage.is-dragging { cursor: grabbing; }
+    .collage-track {
+      display: flex;
+      align-items: flex-end;
+      gap: clamp(7px, .65vw, 11px);
+      width: max-content;
+      height: min(44vw, 660px);
+      will-change: transform;
+    }
+    .tile {
+      --scale: .9;
+      --alpha: .62;
+      position: relative;
+      display: block;
+      flex: 0 0 auto;
+      width: clamp(210px, 18.5vw, 284px);
+      aspect-ratio: 1170 / 2532;
+      color: inherit;
+      text-decoration: none;
+      opacity: var(--alpha);
+      transform: scale(var(--scale));
+      transform-origin: center bottom;
+      transition: transform .7s var(--ease), opacity .55s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tile:nth-child(4n + 2) { width: clamp(190px, 16vw, 250px); }
+    .tile:nth-child(4n + 3) { width: clamp(225px, 20vw, 304px); }
+    .tile:nth-child(4n + 4) { width: clamp(198px, 17vw, 260px); }
+    .tile.is-active { z-index: 2; }
+    .tile-media {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--soft);
+      box-shadow: 0 16px 45px rgba(0,0,0,.055);
+    }
+    .tile img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      background: var(--soft);
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+    .tile-caption {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 12px);
+      width: max-content;
+      max-width: 240px;
+      opacity: 0;
+      text-align: center;
+      transform: translate(-50%, 7px);
+      transition: opacity .45s var(--ease), transform .45s var(--ease);
+      pointer-events: none;
+    }
+    .tile:hover .tile-caption,
+    .tile:focus-visible .tile-caption,
+    .tile.is-active .tile-caption {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+    .tile-label { font-size: 12px; line-height: 1.2; }
+    .tile-desc { margin-top: 3px; font-size: 11px; line-height: 1.3; color: var(--muted); }
+    .home-foot {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 58px;
+      padding: 19px var(--pad) 18px;
+      border-top: .5px solid var(--line);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .case-view,
+    .about-view { min-height: 100dvh; background: var(--bg); }
+    .page-head {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 48px;
+      padding: max(8px, env(safe-area-inset-top)) var(--pad) 9px;
+      border-bottom: .5px solid var(--line);
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(12px);
+    }
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .back-button svg,
+    .next-link svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.35;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .page-name { font-family: var(--display); font-size: 16px; }
+    .case-title-wrap,
+    .about-title-wrap { padding: clamp(44px, 8vw, 116px) var(--pad) clamp(30px, 5vw, 72px); }
+    .case-title,
+    .about-title {
+      margin: 0;
+      max-width: 1180px;
+      font-family: var(--display);
+      font-size: clamp(66px, 10.2vw, 148px);
+      font-weight: 400;
+      line-height: .92;
+      letter-spacing: -.075em;
+    }
+    .case-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: .5px solid var(--line);
+      border-bottom: .5px solid var(--line);
+    }
+    .case-platform,
+    .case-result { padding: clamp(20px, 3vw, 42px) var(--pad); }
+    .case-platform { border-right: .5px solid var(--line); }
+    .eyebrow { margin-bottom: 16px; font-size: 11px; color: var(--muted); }
+    .case-platform p {
+      margin: 0;
+      max-width: 550px;
+      font-size: clamp(17px, 1.7vw, 24px);
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .case-result strong {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(54px, 7.5vw, 108px);
+      font-weight: 400;
+      line-height: .9;
+      letter-spacing: -.045em;
+    }
+    .case-result span { display: block; margin-top: 15px; font-size: 13px; line-height: 1.6; color: var(--muted); }
+    .case-evidence {
+      display: grid;
+      place-items: start center;
+      padding: clamp(58px, 9vw, 130px) var(--pad);
+      background: var(--soft);
+    }
+    .case-figure { width: min(100%, 620px); margin: 0; }
+    .case-figure img { display: block; width: 100%; height: auto; object-fit: contain; background: #fff; }
+    .case-figure figcaption {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 13px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .case-next {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      padding: clamp(44px, 7vw, 96px) var(--pad);
+      border-top: .5px solid var(--line);
+    }
+    .next-kicker { margin: 0 0 8px; font-size: 11px; color: var(--muted); }
+    .next-title {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(35px, 4.5vw, 66px);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -.045em;
+    }
+    .next-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      flex: 0 0 auto;
+      border: .5px solid var(--ink);
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+      transition: background .25s ease, color .25s ease;
+    }
+    .next-link:hover,
+    .next-link:focus-visible { background: var(--ink); color: var(--bg); }
+    .about-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: .5px solid var(--line);
+      border-bottom: .5px solid var(--line);
+    }
+    .about-copy,
+    .about-contact { padding: clamp(28px, 4vw, 60px) var(--pad); }
+    .about-copy { border-right: .5px solid var(--line); }
+    .about-copy p {
+      margin: 0;
+      max-width: 620px;
+      font-size: clamp(20px, 2.35vw, 34px);
+      line-height: 1.55;
+      letter-spacing: -.025em;
+    }
+    .about-contact { display: grid; align-content: space-between; gap: 50px; }
+    .about-contact .contact-list { gap: 12px; }
+    .about-contact .contact-link { font-size: 16px; }
+    .nav-link:focus-visible,
+    .contact-link:focus-visible,
+    .tile:focus-visible,
+    .back-button:focus-visible,
+    .next-link:focus-visible,
+    .menu-button:focus-visible,
+    .menu-close:focus-visible,
+    .menu-link:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+
+    @media (max-width: 720px) {
+      .top-nav { display: none; }
+      .mobile-head {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 48px;
+        padding: max(9px, env(safe-area-inset-top)) 12px 9px;
+        border-bottom: .5px solid var(--line);
+        background: rgba(255,255,255,.97);
+        backdrop-filter: blur(12px);
+      }
+      .mobile-name { font-family: var(--display); font-size: 20px; letter-spacing: -.035em; }
+      .menu-button,
+      .menu-close { min-height: 30px; padding: 0; border: 0; background: transparent; font-size: 12px; cursor: pointer; }
+      .mobile-menu {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        min-height: 100dvh;
+        padding: max(14px, env(safe-area-inset-top)) 18px max(24px, env(safe-area-inset-bottom));
+        background: var(--ink);
+        color: var(--bg);
+      }
+      .menu-top { display: flex; justify-content: space-between; align-items: center; }
+      .menu-links { display: grid; align-content: center; gap: 11px; }
+      .menu-link {
+        width: fit-content;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: inherit;
+        font-family: var(--display);
+        font-size: clamp(48px, 15vw, 68px);
+        line-height: 1.02;
+        letter-spacing: -.055em;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .menu-contact { display: grid; gap: 7px; font-size: 13px; color: #bdbdb7; }
+      .menu-contact a { text-decoration: none; }
+      .wordmark { display: none; }
+      .intro-band { display: block; min-height: 0; border-top: 0; }
+      .intro-statement {
+        padding: 45px 22px 24px;
+        font-size: clamp(31px, 9.5vw, 42px);
+        line-height: 1.12;
+        text-align: center;
+      }
+      .intro-profile { display: block; padding: 0 22px 27px; border-left: 0; text-align: center; }
+      .capabilities { margin: 0 auto; max-width: 330px; font-size: 13px; line-height: 1.65; }
+      .contact-list { display: flex; justify-content: center; gap: 17px; margin-top: 17px; }
+      .contact-link { gap: 6px; font-size: 11px; }
+      .collage { padding-top: 67px; margin-top: 0; }
+      .collage-track { gap: 7px; height: min(139vw, 560px); }
+      .tile,
+      .tile:nth-child(4n + 3) { width: min(62vw, 270px); }
+      .tile:nth-child(4n + 2),
+      .tile:nth-child(4n + 4) { width: min(55vw, 240px); }
+      .tile-caption { bottom: calc(100% + 9px); opacity: 0; transform: translate(-50%, 4px); }
+      .tile.is-active .tile-caption { opacity: 1; transform: translate(-50%, 0); }
+      .tile-label { font-size: 12px; }
+      .tile-desc { font-size: 10px; }
+      .home-foot { min-height: 48px; padding: 15px 12px; }
+      .case-title-wrap,
+      .about-title-wrap { padding: 48px 18px 42px; }
+      .case-title,
+      .about-title { font-size: clamp(55px, 16vw, 76px); line-height: .98; }
+      .case-meta { grid-template-columns: 1fr; }
+      .case-platform { border-right: 0; border-bottom: .5px solid var(--line); }
+      .case-platform,
+      .case-result { padding: 27px 18px 30px; }
+      .case-platform p { font-size: 16px; }
+      .case-result strong { font-size: 64px; }
+      .case-evidence { padding: 54px 18px; }
+      .case-next { padding: 45px 18px; }
+      .next-title { font-size: 36px; }
+      .next-link { width: 46px; height: 46px; }
+      .about-body { grid-template-columns: 1fr; }
+      .about-copy { border-right: 0; border-bottom: .5px solid var(--line); }
+      .about-copy,
+      .about-contact { padding: 30px 18px 36px; }
+      .about-copy p { font-size: 23px; }
+      .about-contact .contact-list { display: grid; justify-content: start; margin-top: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top-nav" id="desktopNav">
+    <div class="nav-inner">
+      <button class="nav-link n-home" type="button" data-view="home">HOME</button>
+      <button class="nav-link n-work" type="button" data-action="work">WORK</button>
+      <div class="nav-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="1"><circle cx="16" cy="16" r="5"/><path d="M16 1v9M16 22v9M1 16h9M22 16h9M5.4 5.4l6.3 6.3M20.3 20.3l6.3 6.3M26.6 5.4l-6.3 6.3M11.7 20.3l-6.3 6.3"/></g></svg>
+      </div>
+      <button class="nav-link n-about" type="button" data-view="about">ABOUT</button>
+      <a class="nav-link n-contact" href="mailto:107533936@qq.com">CONTACT</a>
+    </div>
+  </header>
+  <header class="mobile-head" id="mobileHead">
+    <div class="mobile-name">谢叙雨</div>
+    <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mobileMenu">MENU</button>
+  </header>
+  <aside class="mobile-menu" id="mobileMenu" hidden>
+    <div class="menu-top"><div class="mobile-name">谢叙雨</div><button class="menu-close" id="menuClose" type="button">CLOSE</button></div>
+    <nav class="menu-links" aria-label="手机导航">
+      <button class="menu-link" type="button" data-view="home">首页</button>
+      <button class="menu-link" type="button" data-action="work">作品</button>
+      <button class="menu-link" type="button" data-view="about">关于</button>
+    </nav>
+    <div class="menu-contact"><a href="tel:13765106962">13765106962</a><a href="mailto:107533936@qq.com">107533936@qq.com</a></div>
+  </aside>
+
+  <main id="homeView">
+    <section class="wordmark" aria-label="谢叙雨"><h1>谢叙雨</h1></section>
+    <section class="intro-band" aria-label="个人介绍">
+      <div class="intro-statement">做能被看见<br>也能带来行动的内容</div>
+      <div class="intro-profile">
+        <p class="capabilities">内容运营　用户增长　竞品研究<br>Skill / Agent 工作流</p>
+        <div class="contact-list" aria-label="联系方式">
+          <a class="contact-link" href="tel:13765106962" aria-label="电话 13765106962">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 3.7 4.8 5.2c-.8.5-.9 1.3-.6 2.2 1.7 5 5.3 8.6 10.3 10.3.9.3 1.7.2 2.2-.6l1.5-2.4-3.4-2-1.4 1.4c-2.1-1.1-3.8-2.8-4.9-4.9l1.4-1.4z"/></svg><span>13765106962</span>
+          </a>
+          <a class="contact-link" href="mailto:107533936@qq.com" aria-label="邮箱 107533936@qq.com">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="1.4"/><path d="m4.7 7.2 7.3 5.7 7.3-5.7"/></svg><span>107533936@qq.com</span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="collage" id="collage" aria-labelledby="workTitle">
+      <h2 class="sr-only" id="workTitle">作品</h2>
+      <div class="collage-track" id="collageTrack">
+        <a class="tile" href="?case=xhs" data-case="xhs"><div class="tile-caption"><div class="tile-label">去 AI 味十大 Skill 榜</div><div class="tile-desc">小红书高表现内容</div></div><div class="tile-media"><img src="assets/xhs-top.png" alt="小红书去 AI 味十大 Skill 榜完整截图" draggable="false"></div></a>
+        <a class="tile" href="?case=douyin" data-case="douyin"><div class="tile-caption"><div class="tile-label">Skill 内容短视频</div><div class="tile-desc">抖音高表现内容</div></div><div class="tile-media"><img src="assets/douyin-top.png" alt="抖音 Skill 高表现内容完整截图" draggable="false"></div></a>
+        <a class="tile" href="?case=xhs" data-case="xhs"><div class="tile-caption"><div class="tile-label">1.9万收藏</div><div class="tile-desc">选题　图文　发布</div></div><div class="tile-media"><img src="assets/xhs-top.png" alt="小红书高表现内容完整截图" draggable="false"></div></a>
+        <a class="tile" href="?case=douyin" data-case="douyin"><div class="tile-caption"><div class="tile-label">32.3万播放</div><div class="tile-desc">短视频　发布　数据</div></div><div class="tile-media"><img src="assets/douyin-top.png" alt="抖音高表现内容完整截图" draggable="false"></div></a>
+      </div>
+    </section>
+    <footer class="home-foot"><span>内容运营　用户增长</span><span>2026</span></footer>
+  </main>
+
+  <section class="case-view" id="caseView" hidden aria-labelledby="caseTitle">
+    <header class="page-head"><button class="back-button" type="button" data-back><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg><span>返回</span></button><div class="page-name">谢叙雨</div></header>
+    <div class="case-title-wrap"><h1 class="case-title" id="caseTitle"></h1></div>
+    <section class="case-meta">
+      <div class="case-platform"><div class="eyebrow" id="casePlatform"></div><p id="caseDescription"></p></div>
+      <div class="case-result"><div class="eyebrow">发布结果</div><strong id="caseMetric"></strong><span id="caseSupport"></span></div>
+    </section>
+    <section class="case-evidence"><figure class="case-figure"><img id="caseImage" src="" alt=""><figcaption><span id="caseCaption"></span><span>完整原图</span></figcaption></figure></section>
+    <footer class="case-next"><div><p class="next-kicker">下一个案例</p><h2 class="next-title" id="nextTitle"></h2></div><button class="next-link" id="nextCase" type="button" aria-label="打开下一个案例"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></footer>
+  </section>
+
+  <section class="about-view" id="aboutView" hidden aria-labelledby="aboutTitle">
+    <header class="page-head"><button class="back-button" type="button" data-back><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg><span>返回</span></button><div class="page-name">谢叙雨</div></header>
+    <div class="about-title-wrap"><h1 class="about-title" id="aboutTitle">关于我</h1></div>
+    <div class="about-body">
+      <div class="about-copy"><p>8 年内容运营与用户增长经验<br>做过账号增长　热点传播　社群运营和内容产品支持<br>近年聚焦 AI 产品　Skill 与 Agent 工作流</p></div>
+      <div class="about-contact"><div class="eyebrow">联系方式</div><div class="contact-list">
+        <a class="contact-link" href="tel:13765106962" aria-label="电话 13765106962"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 3.7 4.8 5.2c-.8.5-.9 1.3-.6 2.2 1.7 5 5.3 8.6 10.3 10.3.9.3 1.7.2 2.2-.6l1.5-2.4-3.4-2-1.4 1.4c-2.1-1.1-3.8-2.8-4.9-4.9l1.4-1.4z"/></svg><span>13765106962</span></a>
+        <a class="contact-link" href="mailto:107533936@qq.com" aria-label="邮箱 107533936@qq.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="1.4"/><path d="m4.7 7.2 7.3 5.7 7.3-5.7"/></svg><span>107533936@qq.com</span></a>
+      </div></div>
+    </div>
+  </section>
+
+  <script>
+    const collage = document.querySelector('#collage');
+    const track = document.querySelector('#collageTrack');
+    const homeView = document.querySelector('#homeView');
+    const caseView = document.querySelector('#caseView');
+    const aboutView = document.querySelector('#aboutView');
+    const desktopNav = document.querySelector('#desktopNav');
+    const mobileHead = document.querySelector('#mobileHead');
+    const mobileMenu = document.querySelector('#mobileMenu');
+    const menuButton = document.querySelector('#menuButton');
+    const menuClose = document.querySelector('#menuClose');
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const caseData = {
+      xhs: {
+        title: '去 AI 味十大 Skill 榜', platform: '小红书',
+        description: '围绕用户对 AI 内容同质化的真实痛点完成选题与图文发布',
+        metric: '1.9万', support: '收藏　1.2万赞　2991次分享　302条评论',
+        image: 'assets/xhs-top.png', alt: '小红书去 AI 味十大 Skill 榜完整截图', caption: '小红书高表现内容', next: 'douyin'
+      },
+      douyin: {
+        title: 'Skill 内容短视频', platform: '抖音',
+        description: '把 Skill 选题改写为短视频表达并根据平台节奏完成发布',
+        metric: '32.3万', support: '播放　1.1万赞　1.4万收藏　108条评论',
+        image: 'assets/douyin-top.png', alt: '抖音 Skill 高表现内容完整截图', caption: '抖音高表现内容', next: 'xhs'
+      }
+    };
+
+    track.innerHTML += track.innerHTML;
+    const tiles = [...track.querySelectorAll('.tile')];
+    tiles.slice(4).forEach(tile => { tile.setAttribute('aria-hidden', 'true'); tile.tabIndex = -1; });
+    let offset = 0;
+    let speed = reduceMotion ? 0 : 24;
+    let targetSpeed = speed;
+    let dragging = false;
+    let captured = false;
+    let moved = 0;
+    let lastX = 0;
+    let lastTime = 0;
+    let velocity = 0;
+    let momentum = 0;
+    let previousFrame = performance.now();
+    let activeTile = null;
+    let homeScrollY = 0;
+
+    function updateTileFocus() {
+      const viewportCenter = innerWidth / 2;
+      let nearest = null;
+      let nearestDistance = Infinity;
+      tiles.forEach(tile => {
+        const rect = tile.getBoundingClientRect();
+        const distance = Math.abs(rect.left + rect.width / 2 - viewportCenter);
+        const proximity = Math.max(0, 1 - distance / Math.max(innerWidth * .72, 1));
+        tile.style.setProperty('--scale', (.86 + proximity * .14).toFixed(3));
+        tile.style.setProperty('--alpha', (.48 + proximity * .52).toFixed(3));
+        if (distance < nearestDistance) { nearestDistance = distance; nearest = tile; }
+      });
+      if (nearest !== activeTile) {
+        tiles.forEach(tile => tile.classList.toggle('is-active', tile === nearest));
+        activeTile = nearest;
+      }
+    }
+    function tick(now) {
+      const dt = Math.min(.05, (now - previousFrame) / 1000);
+      previousFrame = now;
+      if (!dragging && !homeView.hidden) {
+        speed += (targetSpeed - speed) * .07;
+        momentum *= Math.pow(.001, dt);
+        if (Math.abs(momentum) < 1) momentum = 0;
+        offset += (speed + momentum) * dt;
+      }
+      const half = track.scrollWidth / 2 || 1;
+      offset = ((offset % half) + half) % half;
+      track.style.transform = `translateX(${-offset}px)`;
+      updateTileFocus();
+      requestAnimationFrame(tick);
+    }
+    collage.addEventListener('pointerdown', event => {
+      dragging = true; captured = false; moved = 0; velocity = 0; momentum = 0;
+      lastX = event.clientX; lastTime = performance.now();
+    });
+    collage.addEventListener('pointermove', event => {
+      if (!dragging) return;
+      const now = performance.now();
+      const dx = event.clientX - lastX;
+      moved += Math.abs(dx);
+      if (!captured && moved > 6) {
+        captured = true; collage.classList.add('is-dragging');
+        try { collage.setPointerCapture(event.pointerId); } catch {}
+      }
+      if (captured) { offset -= dx; velocity = -dx / Math.max(1, now - lastTime) * 1000; }
+      lastX = event.clientX; lastTime = now;
+    });
+    function endDrag() {
+      if (!dragging) return;
+      dragging = false; collage.classList.remove('is-dragging');
+      momentum = Math.max(-1900, Math.min(1900, velocity));
+    }
+    collage.addEventListener('pointerup', endDrag);
+    collage.addEventListener('pointercancel', endDrag);
+    collage.addEventListener('mouseenter', () => { targetSpeed = 0; });
+    collage.addEventListener('mouseleave', () => { targetSpeed = reduceMotion ? 0 : 24; });
+    collage.addEventListener('click', event => {
+      if (moved > 6) { event.preventDefault(); event.stopPropagation(); }
+    }, true);
+
+    function closeMenu() {
+      mobileMenu.hidden = true;
+      menuButton.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    function openMenu() {
+      mobileMenu.hidden = false;
+      menuButton.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      menuClose.focus();
+    }
+    menuButton.addEventListener('click', openMenu);
+    menuClose.addEventListener('click', closeMenu);
+    function setChrome(show) { desktopNav.hidden = !show; mobileHead.hidden = !show; }
+    function showHome(push = false) {
+      caseView.hidden = true; aboutView.hidden = true; homeView.hidden = false; setChrome(true); closeMenu();
+      if (push) history.pushState({ view: 'home' }, '', location.pathname);
+      requestAnimationFrame(() => scrollTo(0, homeScrollY));
+    }
+    function showAbout(push = true) {
+      homeScrollY = scrollY; homeView.hidden = true; caseView.hidden = true; aboutView.hidden = false; setChrome(false); closeMenu(); scrollTo(0, 0);
+      if (push) history.pushState({ view: 'about' }, '', '?view=about');
+    }
+    function showCase(key, push = true) {
+      const data = caseData[key] || caseData.xhs;
+      homeScrollY = scrollY; homeView.hidden = true; aboutView.hidden = true; caseView.hidden = false; setChrome(false); closeMenu();
+      document.querySelector('#caseTitle').textContent = data.title;
+      document.querySelector('#casePlatform').textContent = data.platform;
+      document.querySelector('#caseDescription').textContent = data.description;
+      document.querySelector('#caseMetric').textContent = data.metric;
+      document.querySelector('#caseSupport').textContent = data.support;
+      document.querySelector('#caseImage').src = data.image;
+      document.querySelector('#caseImage').alt = data.alt;
+      document.querySelector('#caseCaption').textContent = data.caption;
+      document.querySelector('#nextTitle').textContent = caseData[data.next].title;
+      document.querySelector('#nextCase').dataset.case = data.next;
+      scrollTo(0, 0);
+      if (push) history.pushState({ view: 'case', case: key }, '', `?case=${key}`);
+    }
+    tiles.forEach(tile => tile.addEventListener('click', event => {
+      if (moved > 6) return;
+      event.preventDefault(); showCase(tile.dataset.case, true);
+    }));
+    document.querySelector('#nextCase').addEventListener('click', event => showCase(event.currentTarget.dataset.case, true));
+    document.querySelectorAll('[data-back]').forEach(button => button.addEventListener('click', () => {
+      if (history.state?.view && history.length > 1) history.back(); else showHome(true);
+    }));
+    document.querySelectorAll('[data-view="home"]').forEach(button => button.addEventListener('click', () => showHome(true)));
+    document.querySelectorAll('[data-view="about"]').forEach(button => button.addEventListener('click', () => showAbout(true)));
+    document.querySelectorAll('[data-action="work"]').forEach(button => button.addEventListener('click', () => {
+      closeMenu();
+      if (homeView.hidden) {
+        showHome(true);
+        requestAnimationFrame(() => collage.scrollIntoView({ block: 'start' }));
+      } else {
+        collage.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      }
+    }));
+    addEventListener('popstate', () => {
+      const params = new URLSearchParams(location.search);
+      if (params.has('case')) showCase(params.get('case'), false);
+      else if (params.get('view') === 'about') showAbout(false);
+      else showHome(false);
+    });
+    addEventListener('keydown', event => { if (event.key === 'Escape' && !mobileMenu.hidden) closeMenu(); });
+    history.replaceState({ view: 'home' }, '', location.href);
+    const initial = new URLSearchParams(location.search);
+    if (initial.has('case')) showCase(initial.get('case'), false);
+    else if (initial.get('view') === 'about') showAbout(false);
+    requestAnimationFrame(tick);
+  </script>
+</body>
+</html>
