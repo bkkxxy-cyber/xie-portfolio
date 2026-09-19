@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>谢叙雨｜作品集</title>
+  <style>
+    :root{--bg:#e2e5e3;--ink:#202426;--muted:#697174;--line:rgba(32,36,38,.22);--accent:#d8f23f;--panel:#f7f7f2}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:"HarmonyOS Sans SC","MiSans","Noto Sans SC","PingFang SC",sans-serif;font-weight:400}
+    button,a{font:inherit;color:inherit}a{text-decoration:none}.site{min-height:100vh;padding:22px 28px 30px}.topbar{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:0 0 15px;font-size:14px}.brand{font-weight:600;letter-spacing:.05em}.topnav{display:flex;gap:28px}.topnav a{color:var(--muted);transition:color .25s ease}.topnav a:hover,.topnav a.active{color:var(--ink)}
+    .hero{min-height:calc(100vh - 105px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:9vw;align-items:center;padding:8vh 4vw 7vh}.hero.is-hidden{display:none}.hero h1{font-size:clamp(72px,11vw,170px);font-weight:500;letter-spacing:.02em;line-height:.9;margin:0 0 42px}.hero-sub{display:none}.capabilities{display:grid;gap:13px;max-width:560px;margin-bottom:52px}.capability{width:max-content;border:0;background:none;padding:0 0 7px;border-bottom:1px solid transparent;cursor:pointer;color:var(--muted);font-size:clamp(20px,2.2vw,30px);letter-spacing:.04em;transition:all .25s ease}.capability:hover,.capability:focus-visible,.capability.is-active{color:var(--ink);border-bottom-color:var(--accent);outline:0}.contact{display:grid;gap:10px;color:var(--muted);font-size:14px;letter-spacing:.04em}.contact a:hover{color:var(--ink)}.contact-label{display:inline-block;width:42px;color:var(--ink)}
+    .hero-index{border-left:1px solid var(--line);padding-left:clamp(25px,4vw,64px);min-height:370px;display:flex;flex-direction:column;justify-content:center}.index-list{display:grid;gap:0}.index-item{display:grid;grid-template-columns:55px 1fr;align-items:center;border-top:1px solid var(--line);padding:22px 0;cursor:pointer;transition:padding .25s ease,color .25s ease}.index-item:last-child{border-bottom:1px solid var(--line)}.index-item:hover{padding-left:10px;color:var(--ink)}.index-num{font-size:24px;color:var(--muted)}.index-name{font-size:24px;letter-spacing:.04em}
+    .preview{position:fixed;right:30px;bottom:30px;width:min(370px,calc(100vw - 60px));padding:18px;background:var(--panel);border:1px solid var(--line);box-shadow:0 16px 50px rgba(15,20,20,.12);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s ease,transform .25s ease;z-index:20}.preview.is-visible{opacity:1;transform:translateY(0)}.preview-kicker{font-size:12px;color:var(--muted);margin-bottom:10px}.preview-title{font-size:22px;margin-bottom:7px}.preview-copy{font-size:14px;line-height:1.7;color:var(--muted)}.preview-link{display:inline-block;margin-top:14px;padding:7px 11px;background:var(--accent);font-size:13px}
+    .panel{min-height:calc(100vh - 105px);padding:110px 8vw 130px;border-top:1px solid var(--line);display:none}.panel.is-open{display:block;animation:enter .35s ease both}.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;margin-bottom:70px}.panel h2{font-size:clamp(46px,7vw,100px);font-weight:500;letter-spacing:-.08em;line-height:.95;margin:0}.close{border:0;background:none;cursor:pointer;color:var(--muted);font-size:14px;padding:6px 0;border-bottom:1px solid var(--line)}.case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}.case{background:var(--bg);padding:30px;min-height:260px;cursor:pointer;transition:background .25s ease}.case:hover{background:var(--panel)}.case-id{font-size:13px;color:var(--muted);margin-bottom:40px}.case h3{font-size:30px;font-weight:500;letter-spacing:-.05em;margin:0 0 15px}.case p{font-size:14px;line-height:1.7;color:var(--muted);margin:0}.about-copy{max-width:700px;font-size:22px;line-height:1.75;letter-spacing:-.03em}.about-meta{margin-top:60px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:620px}.about-meta div{border-top:1px solid var(--line);padding-top:13px;font-size:14px;color:var(--muted)}
+    /* homepage refinement */
+    .topbar{justify-content:flex-end;border-bottom:0}
+    .hero h1{letter-spacing:.02em}
+    .capabilities{display:grid;gap:14px}
+    .capability{font-size:clamp(20px,2.2vw,30px);letter-spacing:.04em}
+    .capability[data-preview="AI 工具"]{display:none}
+    .contact-label{display:inline-flex;align-items:center;gap:7px;width:55px;color:var(--ink)}
+    .contact-label svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+    .hero-index{border-left:0}
+    .index-item:first-child{border-top:0}
+    .hero-art{position:relative;background:var(--panel);padding:12px;overflow:hidden;margin:0}
+    .hero-art img{display:block;width:100%;aspect-ratio:1.55;object-fit:cover;filter:saturate(.8)}
+    .hero-art figcaption,.hero-art .hero-caption{display:flex;justify-content:space-between;gap:20px;padding:14px 3px 1px;font-size:13px;color:var(--muted);letter-spacing:.04em}
+    .hero-art strong{color:var(--ink);font-weight:500}
+    @media(min-width:761px){.hero-right{display:grid;gap:30px;align-content:center}.hero-right .hero-index{min-height:0;padding-left:0}}
+    @media(max-width:760px){.hero-index{border-top:0;padding-top:0}.hero-art{margin-top:8px}.hero-art figcaption{font-size:12px}.capability{font-size:22px}}
+    @keyframes enter{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+    @media(max-width:760px){.site{padding:17px 18px 24px}.topnav{gap:15px;font-size:12px}.hero{min-height:calc(100vh - 85px);display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:55px;padding:8vh 4px 7vh}.hero h1{font-size:74px;margin-bottom:35px}.capabilities{gap:14px;margin-bottom:40px}.capability{font-size:22px}.hero-index{border-left:0;border-top:1px solid var(--line);padding:25px 0 0;min-height:auto}.index-item{padding:18px 0}.index-name{font-size:20px}.index-num{font-size:19px}.preview{right:18px;bottom:18px;width:calc(100vw - 36px)}.panel{padding:80px 4px 90px}.panel-head{margin-bottom:45px}.panel h2{font-size:56px}.case-grid{grid-template-columns:1fr}.case{min-height:220px;padding:23px}.case h3{font-size:26px}.about-copy{font-size:19px}.about-meta{grid-template-columns:1fr;margin-top:42px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+  </style>
+</head>
+<body>
+  <main class="site">
+    <header class="topbar"><span class="brand-spacer" aria-hidden="true"></span><nav class="topnav"><a href="#cases">精选案例</a><a href="#about">关于我</a></nav></header>
+    <section class="hero" id="top">
+      <div class="hero-copy"><h1>谢叙雨</h1><div class="capabilities" aria-label="能力入口"><button class="capability" data-preview="内容运营">内容运营</button><button class="capability" data-preview="用户增长">用户增长</button><button class="capability" data-preview="竞品研究">竞品研究</button><button class="capability" data-preview="AI 工具">AI 工具</button><button class="capability" data-preview="Skill / Agent 工作流">Skill / Agent 工作流</button></div><div class="contact"><a href="tel:13765106962"><span class="contact-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 3.5 5 5c-.8.5-.9 1.3-.6 2.2 1.7 5.1 5.3 8.7 10.4 10.4.9.3 1.7.2 2.2-.6l1.5-2.5-3.5-2-1.4 1.4c-2.1-1.1-3.8-2.8-4.9-4.9L10 7.6z"/></svg>电话</span>13765106962</a><a href="mailto:107533936@qq.com"><span class="contact-label"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="1.5"/><path d="m4.5 7 7.5 6 7.5-6"/></svg>邮箱</span>107533936@qq.com</a></div></div>
+      <div class="hero-right"><div class="hero-art"><img src="../assets/ai-content-support.jpg" alt="内容项目物料"><div class="hero-caption"><strong>让复杂的产品被人看懂</strong><span>精选物料</span></div></div><nav class="hero-index" aria-label="主要入口"><div class="index-list"><a class="index-item" href="#cases"><span class="index-num">01</span><span class="index-name">精选案例</span></a><a class="index-item" href="#about"><span class="index-num">02</span><span class="index-name">关于我</span></a></div></nav></div>
+    </section>
+    <aside class="preview" id="preview" aria-live="polite"><div class="preview-kicker">相关案例</div><div class="preview-title" id="previewTitle"></div><div class="preview-copy" id="previewCopy">点击进入对应案例</div><a class="preview-link" href="#cases">查看案例</a></aside>
+    <section class="panel" id="cases"><div class="panel-head"><h2>精选案例</h2><button class="close" data-close>返回首页</button></div><div class="case-grid"><article class="case"><div class="case-id">01</div><h3>内容运营</h3><p>账号运营<br>选题策划<br>内容发布<br>数据复盘</p></article><article class="case"><div class="case-id">02</div><h3>用户增长</h3><p>内容增长<br>热点传播<br>用户反馈<br>转化优化</p></article><article class="case"><div class="case-id">03</div><h3>竞品研究</h3><p>产品观察<br>内容对比<br>传播路径<br>机会判断</p></article><article class="case"><div class="case-id">04</div><h3>Skill / Agent 工作流</h3><p>流程设计<br>内容生产<br>信息采集<br>重复任务自动化</p></article></div></section>
+    <section class="panel" id="about"><div class="panel-head"><h2>关于我</h2><button class="close" data-close>返回首页</button></div><p class="about-copy">长期从事内容运营和用户增长相关工作<br>关注内容如何被看见<br>也关注工具如何让工作变得更顺畅</p></section>
+  </main>
+  <script>
+    const heroImage=document.querySelector('.hero-art img');
+    if(heroImage) heroImage.src='assets/ai-content-support.jpg';
+    const preview=document.querySelector('#preview');const title=document.querySelector('#previewTitle');const copy=document.querySelector('#previewCopy');
+    document.querySelectorAll('.capability').forEach(btn=>{btn.addEventListener('mouseenter',()=>{document.querySelectorAll('.capability').forEach(x=>x.classList.toggle('is-active',x===btn));title.textContent=btn.dataset.preview;preview.classList.add('is-visible')});btn.addEventListener('mouseleave',()=>{if(!matchMedia('(hover: hover)').matches) return;preview.classList.remove('is-visible');btn.classList.remove('is-active')});btn.addEventListener('click',()=>{title.textContent=btn.dataset.preview;preview.classList.add('is-visible')})});
+    document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>{location.hash='top';document.querySelectorAll('.panel').forEach(p=>p.classList.remove('is-open'))}));
+    const hero=document.querySelector('.hero');
+    function openHash(){const id=location.hash.slice(1);const isPanel=id==='cases'||id==='about';hero.classList.toggle('is-hidden',isPanel);document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('is-open',p.id===id));preview.classList.remove('is-visible');window.scrollTo({top:0,behavior:'smooth'});}
+    window.addEventListener('hashchange',openHash);openHash();
+  </script>
+</body>
+</html>
