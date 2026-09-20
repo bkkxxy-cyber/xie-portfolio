@@ -75,7 +75,12 @@
     .hero-meta { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); gap: clamp(26px, 5vw, 80px); align-items: end; padding: clamp(30px, 4vw, 60px) 0 clamp(34px, 5vw, 72px); border-bottom: 1px solid var(--line); }
     .hero-line { margin: 0; max-width: 760px; font-family: var(--display); font-size: clamp(30px, 4vw, 58px); font-weight: 400; line-height: 1.24; letter-spacing: .035em; }
     .profile-block { min-width: 0; }
-    .capabilities { margin: 0; color: var(--muted); font-size: clamp(13px, 1.2vw, 16px); line-height: 1.9; overflow-wrap: anywhere; }
+    .capabilities { display: flex; flex-wrap: wrap; gap: 5px 15px; margin: 0; color: var(--muted); font-size: clamp(13px, 1.2vw, 16px); line-height: 1.9; }
+    .capability-link { position: relative; border: 0; padding: 0; background: transparent; color: inherit; cursor: pointer; transition: color .3s ease, opacity .3s ease, filter .3s ease; }
+    .capability-link::after { content: ""; position: absolute; left: 0; right: 0; bottom: 1px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
+    .capabilities:has(.capability-link:hover) .capability-link:not(:hover) { opacity: .32; filter: blur(.25px); }
+    .capability-link:hover, .capability-link:focus-visible { color: var(--ink); }
+    .capability-link:hover::after, .capability-link:focus-visible::after { transform: scaleX(1); }
     .contact-list { display: grid; gap: 9px; margin-top: 19px; }
     .contact-link { display: grid; grid-template-columns: 17px minmax(0, auto); align-items: center; gap: 9px; width: fit-content; min-height: 24px; color: var(--muted); font-size: 12px; letter-spacing: .025em; font-variant-numeric: tabular-nums; white-space: nowrap; }
     .contact-link:hover, .contact-link:focus-visible { color: var(--ink); }
@@ -201,7 +206,52 @@
     .about-contact .contact-list { display: flex; justify-content: flex-end; gap: 14px 28px; margin: 0; }
     .about-contact .contact-link { font-size: 14px; }
 
-    .nav-link:focus-visible, .site-name:focus-visible, .menu-button:focus-visible, .mobile-menu-close:focus-visible, .mobile-menu-link:focus-visible, .contact-link:focus-visible, .work-card:focus-visible, .showcase-button:focus-visible, .back-button:focus-visible, .next-button:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+    .case-intro { border-top: 1px solid var(--line); }
+    .case-board { padding: clamp(58px, 8vw, 116px) 0; border-bottom: 1px solid var(--line); overflow: hidden; }
+    .case-board:nth-child(even) { background: var(--panel); }
+    .board-head { display: grid; grid-template-columns: minmax(180px, .62fr) minmax(0, 1.38fr); gap: clamp(28px, 6vw, 96px); align-items: start; padding: 0 var(--pad) clamp(34px, 5vw, 66px); }
+    .board-index { color: var(--muted); font-family: Georgia, "Times New Roman", serif; font-size: 13px; letter-spacing: .04em; }
+    .board-copy { min-width: 0; }
+    .board-label { margin: 0 0 12px; color: var(--muted); font-size: 10px; letter-spacing: .08em; }
+    .board-title { margin: 0; max-width: 780px; font-family: var(--display); font-size: clamp(31px, 4vw, 58px); font-weight: 400; line-height: 1.2; letter-spacing: .03em; overflow-wrap: anywhere; }
+    .board-desc { margin: 18px 0 0; max-width: 620px; color: var(--muted); font-size: 14px; line-height: 1.8; letter-spacing: .03em; }
+    .gallery { --slide-w: min(66vw, 610px); position: relative; }
+    .gallery-track { display: flex; gap: clamp(14px, 2vw, 28px); width: 100%; padding: 18px calc((100% - var(--slide-w)) / 2) 28px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .gallery-track::-webkit-scrollbar { display: none; }
+    .gallery-slide { flex: 0 0 var(--slide-w); min-width: 0; scroll-snap-align: center; opacity: .34; transform: scale(.86); transform-origin: center; transition: opacity .55s ease, transform .7s var(--ease), filter .55s ease; filter: grayscale(.35); }
+    .gallery-slide.is-active { opacity: 1; transform: scale(1); filter: none; }
+    .gallery-frame { display: grid; place-items: center; min-height: clamp(380px, 50vw, 680px); padding: clamp(12px, 2vw, 24px); overflow: hidden; background: color-mix(in srgb, var(--white) 76%, transparent); box-shadow: 0 24px 70px rgba(20, 20, 18, .065); }
+    .gallery-frame img { display: block; width: auto; max-width: 100%; height: auto; max-height: clamp(350px, 47vw, 640px); object-fit: contain; object-position: center; }
+    .gallery-frame img, .single-feature-media img { cursor: zoom-in; }
+    .gallery-slide.is-wide .gallery-frame { min-height: clamp(250px, 31vw, 460px); }
+    .gallery-slide.is-wide .gallery-frame img { width: 100%; max-height: none; }
+    .gallery-caption { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: start; padding-top: 15px; }
+    .gallery-title { display: block; font-family: var(--display); font-size: clamp(17px, 1.7vw, 24px); line-height: 1.35; }
+    .gallery-note { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.55; }
+    .gallery-count { color: var(--muted); font-family: Georgia, "Times New Roman", serif; font-size: 12px; white-space: nowrap; }
+    .gallery-controls { display: flex; justify-content: flex-end; gap: 8px; padding: 0 var(--pad); }
+    .gallery-button { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 50%; background: transparent; cursor: pointer; }
+    .gallery-button:hover, .gallery-button:focus-visible { background: var(--ink); color: var(--paper); }
+    .gallery-button svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; }
+    .single-feature { display: grid; grid-template-columns: minmax(240px, .72fr) minmax(0, 1.28fr); gap: clamp(28px, 6vw, 90px); align-items: center; padding: 0 var(--pad); }
+    .single-feature-media { display: grid; place-items: center; min-height: 420px; padding: clamp(14px, 2.5vw, 30px); background: color-mix(in srgb, var(--white) 76%, transparent); }
+    .single-feature-media img { display: block; width: auto; max-width: 100%; max-height: 650px; height: auto; object-fit: contain; }
+    .single-feature-title { margin: 0; font-family: var(--display); font-size: clamp(32px, 4vw, 58px); font-weight: 400; line-height: 1.2; }
+    .single-feature-desc { margin: 20px 0 0; max-width: 520px; color: var(--muted); font-size: 14px; line-height: 1.85; }
+    .single-feature-facts { display: flex; flex-wrap: wrap; gap: 26px; margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--line); }
+    .single-feature-fact strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: clamp(28px, 3.2vw, 44px); font-weight: 400; line-height: 1; }
+    .single-feature-fact span { display: block; margin-top: 8px; color: var(--muted); font-size: 10px; }
+    .workflow-board-content { display: grid; place-items: center; padding: 0 var(--pad); }
+    .scenario-board { display: grid; place-items: center; padding: 0 var(--pad); }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .85s var(--ease); }
+    .reveal.is-visible { opacity: 1; transform: none; }
+    .lightbox { position: fixed; inset: 0; z-index: 200; overflow: auto; padding: max(64px, env(safe-area-inset-top)) 18px max(30px, env(safe-area-inset-bottom)); background: rgba(14, 14, 13, .94); color: var(--paper); }
+    .lightbox-inner { min-height: 100%; display: grid; place-items: start center; }
+    .lightbox-image { display: block; width: auto; max-width: min(96vw, 1400px); height: auto; background: var(--white); }
+    .lightbox-close { position: fixed; top: max(16px, env(safe-area-inset-top)); right: 18px; z-index: 1; display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid rgba(244,241,234,.45); border-radius: 50%; background: rgba(18,18,18,.7); color: var(--paper); cursor: pointer; }
+    .lightbox-close svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.35; stroke-linecap: round; }
+
+    .nav-link:focus-visible, .site-name:focus-visible, .menu-button:focus-visible, .mobile-menu-close:focus-visible, .mobile-menu-link:focus-visible, .contact-link:focus-visible, .work-card:focus-visible, .showcase-button:focus-visible, .back-button:focus-visible, .next-button:focus-visible, .capability-link:focus-visible, .gallery-button:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
 
     @media (max-width: 760px) {
       .site-head { grid-template-columns: 1fr auto; min-height: 50px; padding-inline: 16px; }
@@ -214,7 +264,7 @@
       .hero-meta { display: block; padding: 42px 0 30px; }
       .hero-line { max-width: 330px; margin-inline: auto; font-size: clamp(30px, 8.5vw, 36px); line-height: 1.24; text-align: center; white-space: nowrap; }
       .profile-block { margin-top: 26px; text-align: center; }
-      .capabilities { max-width: 340px; margin-inline: auto; font-size: 13px; line-height: 1.8; }
+      .capabilities { justify-content: center; max-width: 340px; margin-inline: auto; gap: 2px 13px; font-size: 13px; line-height: 1.8; }
       .contact-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; margin-top: 17px; }
       .contact-link { grid-template-columns: 16px minmax(0, auto); gap: 7px; font-size: 11px; }
       .showcase { min-height: min(690px, 167vw); }
@@ -234,15 +284,15 @@
       .page-head { min-height: 50px; padding-inline: 16px; }
       .case-hero { padding: 48px 18px 40px; }
       .case-kicker { margin-bottom: 13px; }
-      .case-title { font-size: clamp(46px, 12.5vw, 58px); line-height: 1.1; }
-      .case-lead { margin-top: 25px; font-size: 16px; line-height: 1.75; }
+      .case-title { font-size: clamp(39px, 10.8vw, 49px); line-height: 1.12; letter-spacing: .02em; }
+      .case-lead { margin-top: 22px; font-size: 14px; line-height: 1.75; }
       .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .metric { padding: 26px 18px 29px; }
       .metric + .metric { border-left: 0; }
       .metric:nth-child(even) { border-left: 1px solid var(--line); }
       .metric:nth-child(n + 3) { border-top: 1px solid var(--line); }
-      .metric strong { font-size: clamp(38px, 11vw, 49px); }
-      .metric.is-compact strong { font-size: 34px; line-height: 1.15; }
+      .metric strong { font-size: clamp(32px, 9.6vw, 42px); }
+      .metric.is-compact strong { font-size: 29px; line-height: 1.15; }
       .evidence { grid-template-columns: 1fr; gap: 30px; padding: 52px 18px 58px; }
       .evidence:nth-child(even) .evidence-copy, .evidence:nth-child(even) .evidence-media { order: initial; }
       .evidence-title { font-size: 35px; }
@@ -274,6 +324,29 @@
       .about-contact { display: block; padding: 27px 18px 33px; }
       .about-contact-label { margin-bottom: 18px; }
       .about-contact .contact-list { display: grid; justify-content: start; gap: 8px; margin-top: 0; }
+      .case-board { padding: 50px 0 56px; }
+      .board-head { grid-template-columns: 38px minmax(0, 1fr); gap: 7px; padding: 0 18px 29px; }
+      .board-index { padding-top: 4px; font-size: 11px; }
+      .board-label { margin-bottom: 9px; }
+      .board-title { font-size: 29px; line-height: 1.24; }
+      .board-desc { margin-top: 14px; font-size: 12px; line-height: 1.75; }
+      .gallery { --slide-w: min(78vw, 330px); }
+      .gallery-track { gap: 12px; padding-top: 9px; padding-bottom: 20px; }
+      .gallery-frame { min-height: 570px; padding: 10px; }
+      .gallery-frame img { max-height: 545px; }
+      .gallery-slide.is-wide .gallery-frame { min-height: 240px; }
+      .gallery-title { font-size: 17px; }
+      .gallery-note { font-size: 10px; }
+      .gallery-controls { padding-inline: 18px; }
+      .gallery-button { width: 39px; height: 39px; }
+      .single-feature { grid-template-columns: 1fr; gap: 29px; padding: 0 18px; }
+      .single-feature-media { min-height: 330px; padding: 12px; }
+      .single-feature-media img { max-height: 480px; }
+      .single-feature-title { font-size: 31px; }
+      .single-feature-desc { margin-top: 15px; font-size: 12px; line-height: 1.75; }
+      .single-feature-facts { gap: 24px; margin-top: 24px; padding-top: 18px; }
+      .single-feature-fact strong { font-size: 30px; }
+      .workflow-board-content, .scenario-board { padding-inline: 18px; }
     }
     @media (max-width: 355px) { .profile-block .contact-list { display: grid; width: max-content; margin-inline: auto; justify-items: start; } .showcase { min-height: 610px; } }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; } }
@@ -299,7 +372,11 @@
       <div class="hero-meta">
         <p class="hero-line">做能被看见的内容</p>
         <div class="profile-block">
-          <p class="capabilities">内容运营　用户增长　竞品研究<br>Skill / Agent 工作流</p>
+          <div class="capabilities" aria-label="案例入口">
+            <button class="capability-link" type="button" data-case="content">内容运营</button>
+            <button class="capability-link" type="button" data-case="sweetplanet">用户增长</button>
+            <button class="capability-link" type="button" data-case="workflow">Skill / Agent 工作流</button>
+          </div>
           <div class="contact-list" aria-label="联系方式">
             <a class="contact-link" href="tel:13765106962" aria-label="电话 13765106962"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 3.7 4.8 5.2c-.8.5-.9 1.3-.6 2.2 1.7 5 5.3 8.6 10.3 10.3.9.3 1.7.2 2.2-.6l1.5-2.4-3.4-2-1.4 1.4c-2.1-1.1-3.8-2.8-4.9-4.9l1.4-1.4z"/></svg><span>13765106962</span></a>
             <a class="contact-link" href="mailto:107533936@qq.com" aria-label="邮箱 107533936@qq.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="1.4"/><path d="m4.7 7.2 7.3 5.7 7.3-5.7"/></svg><span>107533936@qq.com</span></a>
@@ -343,7 +420,7 @@
     <header class="page-head"><button class="back-button" type="button" data-back><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg><span>返回</span></button><div class="page-brand">谢叙雨</div></header>
     <div class="case-hero"><p class="case-kicker" id="caseKicker"></p><h1 class="case-title" id="caseTitle"></h1><p class="case-lead" id="caseLead"></p></div>
     <section class="metric-grid" id="metricGrid" aria-label="案例数据"></section>
-    <section class="evidence-list" id="evidenceList" aria-label="案例内容"></section>
+    <section class="case-intro" id="evidenceList" aria-label="案例内容"></section>
     <footer class="case-next"><div><p class="next-label">下一个案例</p><h2 class="next-title" id="nextTitle"></h2></div><button class="next-button" id="nextCase" type="button" aria-label="打开下一个案例"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></footer>
   </section>
 
@@ -370,6 +447,11 @@
     </div>
   </section>
 
+  <aside class="lightbox" id="lightbox" hidden aria-label="图片预览">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="关闭图片预览"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="lightbox-inner"><img class="lightbox-image" id="lightboxImage" src="" alt=""></div>
+  </aside>
+
   <script>
     const homeView = document.querySelector('#homeView')
     const caseView = document.querySelector('#caseView')
@@ -380,14 +462,14 @@
     const mobileMenu = document.querySelector('#mobileMenu')
     const menuButton = document.querySelector('#menuButton')
     const menuClose = document.querySelector('#menuClose')
+    const lightbox = document.querySelector('#lightbox')
+    const lightboxImage = document.querySelector('#lightboxImage')
+    const lightboxClose = document.querySelector('#lightboxClose')
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
     let activeIndex = 0
     let autoTimer = null
     let pointerStart = null
     let homeScroll = 0
-
-    const workflowVisual = `<div class="workflow-detail"><div class="workflow-card-label">Skill / Agent</div><div class="workflow-card-title">选题到复盘</div><div class="workflow-flow" aria-hidden="true"><div class="workflow-node" style="--delay:0s">热点检索</div><div class="workflow-node" style="--delay:1s">来源核验</div><div class="workflow-node" style="--delay:2s">内容整理</div><div class="workflow-node" style="--delay:3s">平台改写</div><div class="workflow-node" style="--delay:4s">数据复盘</div></div><div class="workflow-notes"><div class="workflow-note">发现热点与用户问题</div><div class="workflow-note">回到原始信息确认事实</div><div class="workflow-note">提取结构与可用素材</div><div class="workflow-note">按平台语境重写表达</div><div class="workflow-note">依据反馈继续调整</div></div></div>`
-    const scenarioVisual = `<div class="scenario-grid"><div class="scenario-item"><strong>内容生产</strong><span>选题研究、平台改写、发布记录与数据回收</span></div><div class="scenario-item"><strong>信息核验</strong><span>保留信息来源和待核验项，降低事实性错误</span></div><div class="scenario-item"><strong>模型监控</strong><span>跟踪大模型价格、版本与公开信息变化</span></div><div class="scenario-item"><strong>质检与审核</strong><span>完成去重、结构检查和人工确认，保留内容判断</span></div></div>`
 
     const caseData = {
       content: {
@@ -395,9 +477,15 @@
         title: '小澈的赛博茶水间',
         lead: '围绕 AI 工具、Skill 与真实使用场景，完成选题研究、内容策划、发布运营和数据复盘。',
         metrics: [['182.1万', '小红书累计曝光'], ['108.7万', '抖音累计播放'], ['6.4万', '双平台累计收藏'], ['1.03万', '双平台累计分享']],
-        evidence: [
-          { label: '小红书', title: '去 AI 味十大 Skill 榜', desc: '围绕用户对 AI 稿件同质化的直接痛点，用可下载的 Skill 清单和使用路径组织内容。', facts: [['118.2万', '单篇曝光'], ['1.91万', '收藏'], ['2,991', '分享']], image: 'assets/xhs-top.png', alt: '小红书去 AI 味十大 Skill 榜发布截图', shape: 'portrait' },
-          { label: '抖音', title: 'video shotcraft 实跑', desc: '先展示视频生成结果，再用实跑过程解释 Skill 的用途和使用方式。', facts: [['32.3万', '播放'], ['1.35万', '收藏'], ['2,234', '分享']], image: 'assets/douyin-top.png', alt: '抖音 video shotcraft 发布截图', shape: 'portrait' }
+        boards: [
+          { type: 'gallery', label: '账号全貌', title: '同一内容方向的双平台运营', desc: '主页截图保留账号内容结构和整体表现，便于快速判断选题方向与持续运营能力。', slides: [
+            { image: 'assets/xhs-home.png', alt: '小澈的赛博茶水间小红书主页', title: '小红书主页', note: 'AI 工具与 Skill 内容' },
+            { image: 'assets/douyin-home.png', alt: '小澈的赛博茶水间抖音主页', title: '抖音主页', note: '短视频内容与播放表现' }
+          ] },
+          { type: 'gallery', label: '代表内容', title: '高收藏内容与真实实跑', desc: '选取一篇清单型内容和一篇实跑型内容，展示选题、表达和平台适配。', slides: [
+            { image: 'assets/xhs-top.png', alt: '小红书去 AI 味十大 Skill 榜发布截图', title: '去 AI 味十大 Skill 榜', note: '118.2万曝光　1.91万收藏' },
+            { image: 'assets/douyin-top.png', alt: '抖音 video shotcraft 发布截图', title: 'video shotcraft 实跑', note: '32.3万播放　1.35万收藏' }
+          ] }
         ],
         next: 'sweetplanet'
       },
@@ -406,10 +494,25 @@
         title: '甜星球日报社',
         lead: '从 0 创建并运营内容账号，通过热点判断、内容策划和用户反馈推动长期增长。',
         metrics: [['400万', '粉丝规模'], ['62条', '微博热搜'], ['40亿+', '累计话题阅读'], ['100万+', '累计讨论量']],
-        evidence: [
-          { label: '热点传播', title: '单帖11万转发', desc: '把情绪共鸣、热点节点和用户参与组织成可传播的图文内容。', image: 'assets/sweetplanet-hotpost-11w-share.png', alt: '甜星球日报社十一万转发热帖截图' },
-          { label: '持续产出', title: '单帖5万转发', desc: '同一账号内持续产出高传播内容，保持稳定的选题判断和内容表达。', image: 'assets/sweetplanet-hotpost-5w-share.png', alt: '甜星球日报社五万转发热帖截图' },
-          { label: '内容产品化', title: '《甜星球旅途愉快》', desc: '完成内容选材、章节编排和文稿撰写，并将原创内容延展至喜马拉雅音频节目和网易云音乐合作。', facts: [['1万+', '首发销量'], ['1万+', '音乐点赞']], image: 'assets/sweetplanet-book.jpg', alt: '甜星球旅途愉快实体书照片' }
+        boards: [
+          { type: 'gallery', label: '代表热帖', title: '持续产出的高传播内容', desc: '保留平台原始界面和互动数据，展示内容传播结果。', slides: [
+            { image: 'assets/sweetplanet-hotpost-11w-share.png', alt: '甜星球日报社十一万转发热帖', title: '相爱的人终会重逢', note: '11万转发' },
+            { image: 'assets/sweetplanet-hotpost-5w-share.png', alt: '甜星球日报社五万转发热帖', title: '高传播热帖', note: '5万转发' },
+            { image: 'assets/sweetplanet-post-6w.jpg', alt: '甜星球日报社六点四万转发内容', title: '那些有趣的误会', note: '6.4万转发　8.5万点赞' },
+            { image: 'assets/sweetplanet-post-5w.jpg', alt: '甜星球日报社五点五万转发内容', title: '发错信息被表白', note: '5.5万转发　55.9万点赞' }
+          ] },
+          { type: 'gallery', label: '热点传播', title: '内容进入公共讨论', desc: '账号内容多次进入微博热搜，形成站内传播与话题讨论。', slides: [
+            { image: 'assets/hotsearch-1.jpg', alt: '甜星球日报社内容登上微博热搜截图一', title: '微博热搜记录', note: '热点传播结果' },
+            { image: 'assets/hotsearch-2.jpg', alt: '甜星球日报社内容登上微博热搜截图二', title: '微博热搜记录', note: '热点传播结果' },
+            { image: 'assets/hotsearch-3.jpg', alt: '甜星球日报社内容登上微博热搜截图三', title: '微博热搜记录', note: '热点传播结果' }
+          ] },
+          { type: 'feature', label: '内容产品化', title: '《甜星球旅途愉快》', desc: '完成内容选材、章节编排与文稿撰写，将账号积累的原创内容整理成实体书。', image: 'assets/sweetplanet-book.jpg', alt: '甜星球旅途愉快实体书照片', facts: [['1万+', '首发销量']] },
+          { type: 'gallery', label: '跨平台延展', title: '文字内容继续进入声音场景', desc: '原创故事延展为网易云音乐合作歌曲和喜马拉雅电台节目。', slides: [
+            { image: 'assets/netease-player.jpg', alt: '网易云音乐未完待续歌曲播放页', title: '网易云音乐《未完待续》', note: '1万+点赞' },
+            { image: 'assets/netease-comments.jpg', alt: '网易云音乐未完待续评论页', title: '歌曲评论与用户反馈', note: '内容进入新的讨论场景' },
+            { image: 'assets/ximalaya-program.jpg', alt: '喜马拉雅甜星球电台节目页', title: '甜星球电台', note: '明星云集的恋爱故事合集' },
+            { image: 'assets/ximalaya-series.jpg', alt: '喜马拉雅甜星球电台专辑详情页', title: '喜马拉雅节目合集', note: '13万播放　70集' }
+          ] }
         ],
         next: 'workflow'
       },
@@ -418,9 +521,13 @@
         title: 'AI 内容工作流',
         lead: '围绕内容生产、信息采集与事实核验等场景，搭建并维护可复用的 Skill / Agent 工作流。',
         metrics: [['5步', '核心流程'], ['4类', '实际业务场景'], ['多平台', '内容适配'], ['人工审核', '保留内容判断', 'compact']],
-        evidence: [
-          { label: '执行流程', title: '选题到复盘', desc: '在关键节点保留信息来源、处理结果和人工确认，减少重复操作和内容错误。', custom: workflowVisual },
-          { label: '实际应用', title: '已覆盖的工作场景', desc: '工作流处理高频任务，选题、表达和发布前判断仍由人工完成。', custom: scenarioVisual }
+        boards: [
+          { type: 'workflow', label: '执行流程', title: '选题到复盘', desc: '在关键节点保留信息来源、处理结果和人工确认，减少重复操作和内容错误。' },
+          { type: 'gallery', label: '真实运行', title: '工作流进入日常任务', desc: '展示已运行的历史内容检索和模型价格核验结果。', slides: [
+            { image: 'assets/skill-run-panel.png', alt: '数惠助手 Skill 读取历史目录的运行截图', title: '历史内容检索', note: '读取历史　避免重复选题', wide: true },
+            { image: 'assets/price-monitor.png', alt: '国内大模型价格核验结果表', title: '模型价格核验', note: '136条公开价格信息', wide: true }
+          ] },
+          { type: 'scenario', label: '实际应用', title: '覆盖的工作场景', desc: '高频任务由工作流协助处理，选题、表达和发布前判断仍由人工完成。' }
         ],
         next: 'content'
       }
@@ -487,6 +594,8 @@
     function closeMenu() { mobileMenu.hidden = true; menuButton.setAttribute('aria-expanded', 'false'); document.body.classList.remove('is-locked') }
     menuButton.addEventListener('click', openMenu)
     menuClose.addEventListener('click', closeMenu)
+    lightboxClose.addEventListener('click', closeLightbox)
+    lightbox.addEventListener('click', event => { if (event.target === lightbox || event.target.classList.contains('lightbox-inner')) closeLightbox() })
 
     function showHome(push = false) {
       caseView.hidden = true; aboutView.hidden = true; homeView.hidden = false; siteHead.hidden = false; closeMenu()
@@ -503,37 +612,143 @@
       target.replaceChildren(...metrics.map(([value, label, modifier]) => {
         const item = document.createElement('div'); item.className = 'metric'
         if (modifier) item.classList.add(`is-${modifier}`)
-        const strong = document.createElement('strong'); strong.textContent = value
+        const strong = document.createElement('strong'); strong.textContent = value; strong.dataset.value = value
         const span = document.createElement('span'); span.textContent = label
         item.append(strong, span); return item
       }))
     }
 
+    function makeBoardHead(item, index) {
+      const head = document.createElement('div'); head.className = 'board-head reveal'
+      const count = document.createElement('div'); count.className = 'board-index'; count.textContent = String(index + 1).padStart(2, '0')
+      const copy = document.createElement('div'); copy.className = 'board-copy'
+      const label = document.createElement('p'); label.className = 'board-label'; label.textContent = item.label
+      const title = document.createElement('h2'); title.className = 'board-title'; title.textContent = item.title
+      const desc = document.createElement('p'); desc.className = 'board-desc'; desc.textContent = item.desc
+      copy.append(label, title, desc); head.append(count, copy)
+      return head
+    }
+
+    function makeGallery(item) {
+      const gallery = document.createElement('div'); gallery.className = 'gallery reveal'
+      const track = document.createElement('div'); track.className = 'gallery-track'; track.tabIndex = 0; track.setAttribute('aria-label', `${item.title}图片`)
+      item.slides.forEach((slide, index) => {
+        const card = document.createElement('figure'); card.className = 'gallery-slide'
+        if (slide.wide) card.classList.add('is-wide')
+        const frame = document.createElement('div'); frame.className = 'gallery-frame'
+        const image = document.createElement('img'); image.src = slide.image; image.alt = slide.alt; image.loading = 'lazy'; image.addEventListener('click', () => openLightbox(slide.image, slide.alt))
+        const caption = document.createElement('figcaption'); caption.className = 'gallery-caption'
+        const copy = document.createElement('span')
+        const title = document.createElement('span'); title.className = 'gallery-title'; title.textContent = slide.title
+        const note = document.createElement('span'); note.className = 'gallery-note'; note.textContent = slide.note
+        const count = document.createElement('span'); count.className = 'gallery-count'; count.textContent = `${String(index + 1).padStart(2, '0')} / ${String(item.slides.length).padStart(2, '0')}`
+        frame.append(image); copy.append(title, note); caption.append(copy, count); card.append(frame, caption); track.append(card)
+      })
+      const controls = document.createElement('div'); controls.className = 'gallery-controls'
+      controls.innerHTML = `<button class="gallery-button gallery-prev" type="button" aria-label="上一张"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button><button class="gallery-button gallery-next" type="button" aria-label="下一张"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>`
+      gallery.append(track, controls); return gallery
+    }
+
+    function makeFeature(item) {
+      const feature = document.createElement('div'); feature.className = 'single-feature reveal'
+      const media = document.createElement('div'); media.className = 'single-feature-media'
+      const image = document.createElement('img'); image.src = item.image; image.alt = item.alt; image.loading = 'lazy'; image.addEventListener('click', () => openLightbox(item.image, item.alt)); media.append(image)
+      const copy = document.createElement('div')
+      const title = document.createElement('h3'); title.className = 'single-feature-title'; title.textContent = item.title
+      const desc = document.createElement('p'); desc.className = 'single-feature-desc'; desc.textContent = item.desc
+      copy.append(title, desc)
+      if (item.facts?.length) {
+        const facts = document.createElement('div'); facts.className = 'single-feature-facts'
+        item.facts.forEach(([value, label]) => { const fact = document.createElement('div'); fact.className = 'single-feature-fact'; fact.innerHTML = `<strong data-value="${value}">${value}</strong><span>${label}</span>`; facts.append(fact) })
+        copy.append(facts)
+      }
+      feature.append(media, copy); return feature
+    }
+
+    function makeWorkflow() {
+      const content = document.createElement('div'); content.className = 'workflow-board-content reveal'
+      content.innerHTML = `<div class="workflow-detail"><div class="workflow-card-label">Skill / Agent</div><div class="workflow-card-title">选题到复盘</div><div class="workflow-flow" aria-hidden="true"><div class="workflow-node" style="--delay:0s">热点检索</div><div class="workflow-node" style="--delay:1s">来源核验</div><div class="workflow-node" style="--delay:2s">内容整理</div><div class="workflow-node" style="--delay:3s">平台改写</div><div class="workflow-node" style="--delay:4s">数据复盘</div></div><div class="workflow-notes"><div class="workflow-note">发现热点与用户问题</div><div class="workflow-note">回到原始信息确认事实</div><div class="workflow-note">提取结构与可用素材</div><div class="workflow-note">按平台语境重写表达</div><div class="workflow-note">依据反馈继续调整</div></div></div>`
+      return content
+    }
+
+    function makeScenario() {
+      const content = document.createElement('div'); content.className = 'scenario-board reveal'
+      content.innerHTML = `<div class="scenario-grid"><div class="scenario-item"><strong>内容生产</strong><span>选题研究、平台改写、发布记录与数据回收</span></div><div class="scenario-item"><strong>信息核验</strong><span>保留信息来源和待核验项，降低事实性错误</span></div><div class="scenario-item"><strong>模型监控</strong><span>跟踪大模型价格、版本与公开信息变化</span></div><div class="scenario-item"><strong>质检与审核</strong><span>完成去重、结构检查和人工确认，保留内容判断</span></div></div>`
+      return content
+    }
+
     function renderEvidence(items) {
       const target = document.querySelector('#evidenceList')
-      target.replaceChildren(...items.map(item => {
-        const section = document.createElement('article'); section.className = 'evidence'
-        if (item.shape) section.classList.add(`is-${item.shape}`)
-        const copy = document.createElement('div'); copy.className = 'evidence-copy'
-        const label = document.createElement('p'); label.className = 'evidence-label'; label.textContent = item.label
-        const title = document.createElement('h2'); title.className = 'evidence-title'; title.textContent = item.title
-        const desc = document.createElement('p'); desc.className = 'evidence-desc'; desc.textContent = item.desc
-        copy.append(label, title, desc)
-        if (item.facts?.length) {
-          const facts = document.createElement('div'); facts.className = 'evidence-facts'
-          item.facts.forEach(([value, factLabel]) => {
-            const fact = document.createElement('div'); fact.className = 'evidence-fact'
-            const strong = document.createElement('strong'); strong.textContent = value
-            const span = document.createElement('span'); span.textContent = factLabel
-            fact.append(strong, span); facts.append(fact)
-          })
-          copy.append(facts)
-        }
-        const media = document.createElement('div'); media.className = 'evidence-media'
-        if (item.custom) media.innerHTML = item.custom
-        else { const image = document.createElement('img'); image.src = item.image; image.alt = item.alt; image.loading = 'lazy'; media.append(image) }
-        section.append(copy, media); return section
+      target.replaceChildren(...items.map((item, index) => {
+        const section = document.createElement('article'); section.className = 'case-board'
+        section.append(makeBoardHead(item, index))
+        if (item.type === 'gallery') section.append(makeGallery(item))
+        if (item.type === 'feature') section.append(makeFeature(item))
+        if (item.type === 'workflow') section.append(makeWorkflow())
+        if (item.type === 'scenario') section.append(makeScenario())
+        return section
       }))
+    }
+
+    function initialiseGalleries() {
+      document.querySelectorAll('.gallery').forEach(gallery => {
+        const track = gallery.querySelector('.gallery-track')
+        const slides = [...gallery.querySelectorAll('.gallery-slide')]
+        let active = 0
+        let frame = null
+        const setActiveSlide = index => {
+          active = Math.max(0, Math.min(slides.length - 1, index))
+          slides.forEach((slide, slideIndex) => slide.classList.toggle('is-active', slideIndex === active))
+        }
+        const update = () => {
+          const center = track.scrollLeft + track.clientWidth / 2
+          let nearest = 0; let distance = Infinity
+          slides.forEach((slide, index) => { const current = Math.abs(slide.offsetLeft + slide.offsetWidth / 2 - center); if (current < distance) { distance = current; nearest = index } })
+          setActiveSlide(nearest); frame = null
+        }
+        const move = direction => {
+          const next = Math.max(0, Math.min(slides.length - 1, active + direction))
+          const slide = slides[next]
+          track.scrollTo({ left: slide.offsetLeft - (track.clientWidth - slide.offsetWidth) / 2, behavior: reduceMotion ? 'auto' : 'smooth' })
+          setActiveSlide(next)
+        }
+        track.addEventListener('scroll', () => { if (!frame) frame = requestAnimationFrame(update) }, { passive: true })
+        gallery.querySelector('.gallery-prev').addEventListener('click', () => move(-1))
+        gallery.querySelector('.gallery-next').addEventListener('click', () => move(1))
+        setActiveSlide(0)
+      })
+    }
+
+    function animateValue(element) {
+      if (element.dataset.animated === 'true') return
+      const text = element.dataset.value || element.textContent
+      const match = text.match(/^([\d,.]+)(.*)$/)
+      if (!match || reduceMotion) { element.textContent = text; element.dataset.animated = 'true'; return }
+      element.dataset.animated = 'true'
+      const raw = match[1]; const suffix = match[2]; const target = Number(raw.replaceAll(',', '')); const decimals = (raw.split('.')[1] || '').length; const usesComma = raw.includes(','); const start = performance.now(); const duration = 1050
+      const tick = now => {
+        const progress = Math.min(1, (now - start) / duration); const eased = 1 - Math.pow(1 - progress, 3); const value = target * eased
+        element.textContent = `${usesComma ? Math.round(value).toLocaleString('en-US') : value.toFixed(decimals)}${suffix}`
+        if (progress < 1) requestAnimationFrame(tick); else element.textContent = text
+      }
+      requestAnimationFrame(tick)
+    }
+
+    function initialiseEntryMotion() {
+      const reveals = [...document.querySelectorAll('#caseView .reveal')]
+      const values = [...document.querySelectorAll('#caseView [data-value]')]
+      if (reduceMotion || !('IntersectionObserver' in window)) { reveals.forEach(item => item.classList.add('is-visible')); values.forEach(animateValue); return }
+      const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver.unobserve(entry.target) } }), { threshold: .14 })
+      const valueObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { animateValue(entry.target); valueObserver.unobserve(entry.target) } }), { threshold: .45 })
+      reveals.forEach(item => revealObserver.observe(item)); values.forEach(item => valueObserver.observe(item))
+    }
+
+    function openLightbox(src, alt) {
+      lightboxImage.src = src; lightboxImage.alt = alt; lightbox.hidden = false; document.body.classList.add('is-locked'); lightbox.scrollTop = 0; lightboxClose.focus()
+    }
+
+    function closeLightbox() {
+      lightbox.hidden = true; lightboxImage.src = ''; lightboxImage.alt = ''; document.body.classList.remove('is-locked')
     }
 
     function showCase(key, push = true) {
@@ -544,11 +759,13 @@
       document.querySelector('#caseLead').textContent = data.lead
       document.querySelector('#nextTitle').textContent = caseData[data.next].title
       document.querySelector('#nextCase').dataset.case = data.next
-      renderMetrics(data.metrics); renderEvidence(data.evidence); scrollTo(0, 0)
+      renderMetrics(data.metrics); renderEvidence(data.boards); scrollTo(0, 0)
+      requestAnimationFrame(() => { initialiseGalleries(); initialiseEntryMotion() })
       if (push) history.pushState({ view: 'case', case: key }, '', `?case=${key}`)
     }
 
     document.querySelector('#nextCase').addEventListener('click', event => showCase(event.currentTarget.dataset.case, true))
+    document.querySelectorAll('.capability-link[data-case]').forEach(button => button.addEventListener('click', () => showCase(button.dataset.case, true)))
     document.querySelectorAll('[data-back]').forEach(button => button.addEventListener('click', () => { if (history.length > 1) history.back(); else showHome(true) }))
     document.querySelectorAll('[data-view="home"]').forEach(button => button.addEventListener('click', () => showHome(true)))
     document.querySelectorAll('[data-view="about"]').forEach(button => button.addEventListener('click', () => showAbout(true)))
@@ -564,7 +781,8 @@
       else showHome(false)
     })
     addEventListener('keydown', event => {
-      if (event.key === 'Escape' && !mobileMenu.hidden) closeMenu()
+      if (event.key === 'Escape' && !lightbox.hidden) closeLightbox()
+      else if (event.key === 'Escape' && !mobileMenu.hidden) closeMenu()
       if (event.key === 'ArrowLeft' && !homeView.hidden) setActive(activeIndex - 1)
       if (event.key === 'ArrowRight' && !homeView.hidden) setActive(activeIndex + 1)
     })
