@@ -147,7 +147,7 @@
     .page-brand { grid-column: 2; font-family: var(--display); font-size: 16px; }
     .case-hero { padding: clamp(56px, 9vw, 138px) var(--pad) clamp(42px, 6vw, 88px); }
     .case-kicker { margin: 0 0 18px; color: var(--muted); font-size: 11px; }
-    .case-title { margin: 0; max-width: 1180px; font-family: var(--display); font-size: clamp(58px, 10vw, 146px); font-weight: 400; line-height: 1.08; letter-spacing: .035em; overflow-wrap: anywhere; }
+    .case-title { margin: 0; width: 100%; font-family: var(--display); font-size: clamp(58px, 9vw, 132px); font-weight: 400; line-height: 1.08; letter-spacing: .035em; white-space: nowrap; }
     .case-lead { margin: clamp(28px, 4vw, 56px) 0 0; max-width: 780px; color: var(--muted); font-size: clamp(17px, 1.8vw, 25px); line-height: 1.7; overflow-wrap: anywhere; }
     .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .metric { min-width: 0; padding: clamp(26px, 4vw, 56px) var(--pad); }
@@ -183,7 +183,7 @@
     .scenario-item span { display: block; max-width: 330px; margin-top: 17px; color: var(--muted); font-size: 12px; line-height: 1.75; }
     .case-next { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: clamp(48px, 8vw, 104px) var(--pad); }
     .next-label { margin: 0 0 8px; color: var(--muted); font-size: 11px; }
-    .next-title { margin: 0; font-family: var(--display); font-size: clamp(34px, 4.8vw, 68px); font-weight: 400; line-height: 1.2; overflow-wrap: anywhere; }
+    .next-title { margin: 0; font-family: var(--display); font-size: clamp(34px, 4.8vw, 68px); font-weight: 400; line-height: 1.2; white-space: nowrap; }
     .next-button { display: grid; place-items: center; width: 54px; height: 54px; flex: 0 0 auto; border: 1px solid var(--ink); border-radius: 50%; background: transparent; cursor: pointer; }
     .next-button svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; }
     .next-button:hover, .next-button:focus-visible { background: var(--ink); color: var(--paper); }
@@ -213,7 +213,7 @@
     .board-index { color: var(--muted); font-family: Georgia, "Times New Roman", serif; font-size: 13px; letter-spacing: .04em; }
     .board-copy { min-width: 0; }
     .board-label { margin: 0 0 12px; color: var(--muted); font-size: 10px; letter-spacing: .08em; }
-    .board-title { margin: 0; max-width: 780px; font-family: var(--display); font-size: clamp(31px, 4vw, 58px); font-weight: 400; line-height: 1.2; letter-spacing: .03em; overflow-wrap: anywhere; }
+    .board-title { margin: 0; max-width: 780px; font-family: var(--display); font-size: clamp(31px, 4vw, 58px); font-weight: 400; line-height: 1.2; letter-spacing: .03em; white-space: nowrap; }
     .board-desc { margin: 18px 0 0; max-width: 620px; color: var(--muted); font-size: 14px; line-height: 1.8; letter-spacing: .03em; }
     .gallery { --slide-w: min(66vw, 610px); position: relative; }
     .gallery-track { display: flex; gap: clamp(14px, 2vw, 28px); width: 100%; padding: 18px calc((100% - var(--slide-w)) / 2) 28px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
@@ -284,7 +284,7 @@
       .page-head { min-height: 50px; padding-inline: 16px; }
       .case-hero { padding: 48px 18px 40px; }
       .case-kicker { margin-bottom: 13px; }
-      .case-title { font-size: clamp(39px, 10.8vw, 49px); line-height: 1.12; letter-spacing: .02em; }
+      .case-title { font-size: clamp(32px, 8.6vw, 39px); line-height: 1.12; letter-spacing: .02em; white-space: nowrap; }
       .case-lead { margin-top: 22px; font-size: 14px; line-height: 1.75; }
       .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .metric { padding: 26px 18px 29px; }
@@ -311,7 +311,7 @@
       .scenario-item { min-height: 0; padding: 26px 22px 29px; }
       .scenario-item strong { font-size: 28px; }
       .case-next { padding: 48px 18px 54px; }
-      .next-title { font-size: 34px; }
+      .next-title { font-size: clamp(26px, 7vw, 34px); }
       .next-button { width: 48px; height: 48px; }
       .about-hero { padding: 55px 18px 45px; }
       .about-title { font-size: 64px; }
@@ -328,7 +328,7 @@
       .board-head { grid-template-columns: 38px minmax(0, 1fr); gap: 7px; padding: 0 18px 29px; }
       .board-index { padding-top: 4px; font-size: 11px; }
       .board-label { margin-bottom: 9px; }
-      .board-title { font-size: 29px; line-height: 1.24; }
+      .board-title { font-size: clamp(23px, 7.2vw, 29px); line-height: 1.24; }
       .board-desc { margin-top: 14px; font-size: 12px; line-height: 1.75; }
       .gallery { --slide-w: min(78vw, 330px); }
       .gallery-track { gap: 12px; padding-top: 9px; padding-bottom: 20px; }
@@ -475,16 +475,15 @@
       content: {
         kicker: '小红书 / 抖音',
         title: '小澈的赛博茶水间',
-        lead: '围绕 AI 工具、Skill 与真实使用场景，完成选题研究、内容策划、发布运营和数据复盘。',
+        lead: '围绕 AI 工具与 Skill，持续运营小红书与抖音账号。',
         metrics: [['182.1万', '小红书累计曝光'], ['108.7万', '抖音累计播放'], ['6.4万', '双平台累计收藏'], ['1.03万', '双平台累计分享']],
         boards: [
-          { type: 'gallery', label: '账号全貌', title: '同一内容方向的双平台运营', desc: '主页截图保留账号内容结构和整体表现，便于快速判断选题方向与持续运营能力。', slides: [
-            { image: 'assets/xhs-home.png', alt: '小澈的赛博茶水间小红书主页', title: '小红书主页', note: 'AI 工具与 Skill 内容' },
-            { image: 'assets/douyin-home.png', alt: '小澈的赛博茶水间抖音主页', title: '抖音主页', note: '短视频内容与播放表现' }
-          ] },
-          { type: 'gallery', label: '代表内容', title: '高收藏内容与真实实跑', desc: '选取一篇清单型内容和一篇实跑型内容，展示选题、表达和平台适配。', slides: [
-            { image: 'assets/xhs-top.png', alt: '小红书去 AI 味十大 Skill 榜发布截图', title: '去 AI 味十大 Skill 榜', note: '118.2万曝光　1.91万收藏' },
-            { image: 'assets/douyin-top.png', alt: '抖音 video shotcraft 发布截图', title: 'video shotcraft 实跑', note: '32.3万播放　1.35万收藏' }
+          { type: 'gallery', label: '内容实绩', title: '双平台内容运营', desc: '小红书 3 篇、抖音 2 篇，覆盖 Skill 清单、工具实测与实用教程。', slides: [
+            { image: 'assets/xiaoche-xhs-deai.png', alt: '小红书去 AI 味十大 Skill 榜内容页', title: '去 AI 味 Skill 榜', note: '小红书　118.2万曝光　1.91万收藏' },
+            { image: 'assets/xiaoche-xhs-ppt.png', alt: '小红书 PPT 十大 Skill 榜内容页', title: 'PPT Skill 榜', note: '小红书　23.3万曝光　2251收藏' },
+            { image: 'assets/xiaoche-xhs-content-ops.png', alt: '小红书内容运营十大 Skill 榜内容页', title: '内容运营 Skill 榜', note: '小红书　5.56万曝光　890收藏' },
+            { image: 'assets/xiaoche-douyin-video-shotcraft.png', alt: '抖音视频生成 Skill 实测内容页', title: '视频生成 Skill 实测', note: '抖音　32.3万播放　1.35万收藏' },
+            { image: 'assets/xiaoche-douyin-ui-effects.png', alt: '抖音 UI 效果命名工具内容页', title: 'UI 效果命名工具', note: '抖音　截至 9 月 16 日 10万播放　2433收藏' }
           ] }
         ],
         next: 'sweetplanet'
@@ -495,19 +494,19 @@
         lead: '从 0 创建并运营内容账号，通过热点判断、内容策划和用户反馈推动长期增长。',
         metrics: [['400万', '粉丝规模'], ['62条', '微博热搜'], ['40亿+', '累计话题阅读'], ['100万+', '累计讨论量']],
         boards: [
-          { type: 'gallery', label: '代表热帖', title: '持续产出的高传播内容', desc: '保留平台原始界面和互动数据，展示内容传播结果。', slides: [
+          { type: 'gallery', label: '传播实绩', title: '高传播热帖', desc: '多篇原创故事获得 5 万至 11 万次转发，相关内容多次进入微博热搜。', slides: [
             { image: 'assets/sweetplanet-hotpost-11w-share.png', alt: '甜星球日报社十一万转发热帖', title: '相爱的人终会重逢', note: '11万转发' },
             { image: 'assets/sweetplanet-hotpost-5w-share.png', alt: '甜星球日报社五万转发热帖', title: '高传播热帖', note: '5万转发' },
             { image: 'assets/sweetplanet-post-6w.jpg', alt: '甜星球日报社六点四万转发内容', title: '那些有趣的误会', note: '6.4万转发　8.5万点赞' },
             { image: 'assets/sweetplanet-post-5w.jpg', alt: '甜星球日报社五点五万转发内容', title: '发错信息被表白', note: '5.5万转发　55.9万点赞' }
           ] },
-          { type: 'gallery', label: '热点传播', title: '内容进入公共讨论', desc: '账号内容多次进入微博热搜，形成站内传播与话题讨论。', slides: [
+          { type: 'gallery', label: '热点传播', title: '多次进入微博热搜', desc: '共登上 62 条微博热搜，累计话题阅读 40 亿+。', slides: [
             { image: 'assets/hotsearch-1.jpg', alt: '甜星球日报社内容登上微博热搜截图一', title: '微博热搜记录', note: '热点传播结果' },
             { image: 'assets/hotsearch-2.jpg', alt: '甜星球日报社内容登上微博热搜截图二', title: '微博热搜记录', note: '热点传播结果' },
             { image: 'assets/hotsearch-3.jpg', alt: '甜星球日报社内容登上微博热搜截图三', title: '微博热搜记录', note: '热点传播结果' }
           ] },
-          { type: 'feature', label: '内容产品化', title: '《甜星球旅途愉快》', desc: '完成内容选材、章节编排与文稿撰写，将账号积累的原创内容整理成实体书。', image: 'assets/sweetplanet-book.jpg', alt: '甜星球旅途愉快实体书照片', facts: [['1万+', '首发销量']] },
-          { type: 'gallery', label: '跨平台延展', title: '文字内容继续进入声音场景', desc: '原创故事延展为网易云音乐合作歌曲和喜马拉雅电台节目。', slides: [
+          { type: 'feature', label: '内容产品化', title: '《甜星球旅途愉快》', desc: '将原创内容策划为实体书，完成选材、章节编排与文稿撰写，首发销量 1 万+。', image: 'assets/sweetplanet-book.jpg', alt: '甜星球旅途愉快实体书照片', facts: [['1万+', '首发销量']] },
+          { type: 'gallery', label: '跨界延展', title: '文字内容音频化', desc: '原创故事改编为合作歌曲与音频节目，进入网易云音乐和喜马拉雅。', slides: [
             { image: 'assets/netease-player.jpg', alt: '网易云音乐未完待续歌曲播放页', title: '网易云音乐《未完待续》', note: '1万+点赞' },
             { image: 'assets/netease-comments.jpg', alt: '网易云音乐未完待续评论页', title: '歌曲评论与用户反馈', note: '内容进入新的讨论场景' },
             { image: 'assets/ximalaya-program.jpg', alt: '喜马拉雅甜星球电台节目页', title: '甜星球电台', note: '明星云集的恋爱故事合集' },
@@ -523,9 +522,11 @@
         metrics: [['5步', '核心流程'], ['4类', '实际业务场景'], ['多平台', '内容适配'], ['人工审核', '保留内容判断', 'compact']],
         boards: [
           { type: 'workflow', label: '执行流程', title: '选题到复盘', desc: '在关键节点保留信息来源、处理结果和人工确认，减少重复操作和内容错误。' },
-          { type: 'gallery', label: '真实运行', title: '工作流进入日常任务', desc: '展示已运行的历史内容检索和模型价格核验结果。', slides: [
-            { image: 'assets/skill-run-panel.png', alt: '数惠助手 Skill 读取历史目录的运行截图', title: '历史内容检索', note: '读取历史　避免重复选题', wide: true },
-            { image: 'assets/price-monitor.png', alt: '国内大模型价格核验结果表', title: '模型价格核验', note: '136条公开价格信息', wide: true }
+          { type: 'gallery', label: '真实运行', title: '工作流实际运行', desc: '内容生产、信息采集与价格监控均已进入日常任务。', slides: [
+            { image: 'assets/workflow-content-skill.jpg', alt: '内容生产 Skill 实际运行记录', title: '内容生产 Skill', note: '读取规则与历史内容　生成候选方向', wide: true },
+            { image: 'assets/workflow-opc-skill.jpg', alt: '信息采集 Skill 实际运行记录', title: '信息采集 Skill', note: '来源分级　原文核验　历史去重', wide: true },
+            { image: 'assets/workflow-price-agent.jpg', alt: '模型价格监控 Agent 实际运行记录', title: '模型价格监控 Agent', note: '定期抓取并输出差异结果', wide: true },
+            { image: 'assets/price-monitor.png', alt: '国内大模型价格核验结果表', title: '模型价格核验结果', note: '136条公开价格信息', wide: true }
           ] },
           { type: 'scenario', label: '实际应用', title: '覆盖的工作场景', desc: '高频任务由工作流协助处理，选题、表达和发布前判断仍由人工完成。' }
         ],
